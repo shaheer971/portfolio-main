@@ -1,9 +1,9 @@
-
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, lazy, Suspense } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import DecryptedText from "./DecryptedText";
 import { AspectRatio } from "./ui/aspect-ratio";
+import { Skeleton } from "./ui/skeleton";
 
 type Project = {
   id: number;
@@ -113,11 +113,56 @@ const projectCategories: ProjectCategory[] = [
   }
 ];
 
+const OptimizedImage = ({ src, alt, className = "" }: { src: string; alt: string; className?: string }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [error, setError] = useState(false);
+  
+  return (
+    <div className="relative w-full h-full">
+      {!isLoaded && !error && (
+        <Skeleton className="absolute inset-0 w-full h-full bg-secondary" />
+      )}
+      <img 
+        src={src} 
+        alt={alt}
+        loading="lazy"
+        onLoad={() => setIsLoaded(true)}
+        onError={() => setError(true)}
+        className={cn(
+          "w-full h-full object-cover transition-opacity duration-300",
+          isLoaded ? "opacity-100" : "opacity-0",
+          className
+        )}
+      />
+    </div>
+  );
+};
+
 const ProjectSection = ({ category }: { category: ProjectCategory }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+  
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+    
+    if (scrollRef.current) {
+      observer.observe(scrollRef.current);
+    }
+    
+    return () => {
+      if (scrollRef.current) {
+        observer.unobserve(scrollRef.current);
+      }
+    };
+  }, []);
 
   const handleScroll = () => {
     if (scrollRef.current) {
@@ -139,7 +184,7 @@ const ProjectSection = ({ category }: { category: ProjectCategory }) => {
       handleScroll();
       return () => scrollContainer.removeEventListener('scroll', handleScroll);
     }
-  }, );
+  }, []);
   
   const scrollToProject = (index: number) => {
     if (scrollRef.current) {
@@ -164,12 +209,14 @@ const ProjectSection = ({ category }: { category: ProjectCategory }) => {
   };
   
   useEffect(() => {
-    const timer = setTimeout(() => {
-      scrollToProject(0);
-    }, 200);
-    
-    return () => clearTimeout(timer);
-  }, []);
+    if (isVisible) {
+      const timer = setTimeout(() => {
+        scrollToProject(0);
+      }, 200);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [isVisible]);
 
   return (
     <div className="mb-4 last:mb-0">
@@ -240,17 +287,16 @@ const ProjectSection = ({ category }: { category: ProjectCategory }) => {
               >
                 <div className="overflow-hidden">
                   <AspectRatio ratio={16/9} className="bg-secondary">
-                    <img 
+                    <OptimizedImage 
                       src={project.image} 
                       alt={project.title} 
-                      className="w-full h-full object-cover" 
                     />
                   </AspectRatio>
                 </div>
                 <h3 className="mt-4 font-medium text-white transition-colors text-lg">
                   <DecryptedText 
                     text={project.title}
-                    animateOn="both"
+                    animateOn={isVisible ? "both" : "hover"}
                     speed={40}
                     sequential={true}
                   />
@@ -258,7 +304,7 @@ const ProjectSection = ({ category }: { category: ProjectCategory }) => {
                 <p className="mt-2 text-sm text-white/60 leading-relaxed">
                   <DecryptedText 
                     text={project.description}
-                    animateOn="both"
+                    animateOn={isVisible ? "both" : "hover"}
                     speed={30}
                     sequential={true}
                   />
