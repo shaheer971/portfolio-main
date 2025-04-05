@@ -26,49 +26,49 @@ const projectCategories: ProjectCategory[] = [
         id: 1,
         title: "Hackathon website",
         description: "A modern website for hackathon events",
-        image: "/src/components/project images/bolt1.png",
+        image: "/public/project images/bolt1.png",
         url: "#"
       },
       {
         id: 2,
         title: "University LMS concept",
         description: "Learning management system concept for KFUPM",
-        image: "/src/components/project images/kfupmlms.png",
+        image: "/public/project images/kfupmlms.png",
         url: "https://www.behance.net/gallery/218659483/KFUPM-LMS-concept"
       },
       {
         id: 3,
         title: "Askify landing",
         description: "Landing page for AI-powered search assistant",
-        image: "/src/components/project images/askify.png",
+        image: "/public/project images/askify.png",
         url: "#"
       },
       {
         id: 4,
         title: "Hackathon concept",
         description: "Modern concept for hackathon platform",
-        image: "/src/components/project images/bolt2.png",
+        image: "/public/project images/bolt2.png",
         url: "#"
       },
       {
         id: 5,
         title: "Saas landing",
         description: "Landing page for SaaS platform",
-        image: "/src/components/project images/nextai.png",
+        image: "/public/project images/nextai.png",
         url: "#"
       },
       {
         id: 6,
         title: "Consultancy landing",
         description: "Landing page for consultancy services",
-        image: "/src/components/project images/onliverse.png",
+        image: "/public/project images/onliverse.png",
         url: "#"
       },
       {
         id: 7,
         title: "LMS concept",
         description: "Learning management system concept",
-        image: "/src/components/project images/wiselearn.png",
+        image: "/public/project images/wiselearn.png",
         url: "#"
       }
     ]
@@ -80,21 +80,21 @@ const projectCategories: ProjectCategory[] = [
         id: 8,
         title: "askify brand identity",
         description: "Brand identity design for Askify",
-        image: "/src/components/project images/askifylogo.png",
+        image: "/public/project images/askifylogo.png",
         url: "#"
       },
       {
         id: 9,
         title: "fayda concept",
         description: "Brand concept for financial platform",
-        image: "/src/components/project images/fayda logo.png",
+        image: "/public/project images/fayda logo.png",
         url: "#"
       },
       {
         id: 10,
         title: "EMRE brand identity",
         description: "Brand identity for photography business",
-        image: "/src/components/project images/emre.png",
+        image: "/public/project images/emre.png",
         url: "#"
       }
     ]
@@ -106,7 +106,7 @@ const projectCategories: ProjectCategory[] = [
         id: 11,
         title: "TWLM poster",
         description: "Poster design for mobile application",
-        image: "/src/components/project images/twlm.png",
+        image: "/public/project images/twlm.png",
         url: "#"
       }
     ]
