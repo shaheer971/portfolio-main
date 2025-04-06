@@ -39,7 +39,7 @@ const ventures: Venture[] = [{
   name: "tahseen.health",
   description: "Simplify health tracking",
   url: "https://tahseen.health"
-},];
+}];
 
 const Ventures = () => {
   return (
@@ -61,7 +61,7 @@ const Ventures = () => {
           </h2>
         </div>
         
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-2">
           {ventures.map(venture => (
             <a 
               key={venture.id} 
