@@ -33,7 +33,7 @@ const projectCategories: ProjectCategory[] = [
         id: 2,
         title: "University LMS concept",
         description: "Learning management system concept for KFUPM",
-        image: "/project%20images/kfupmlms.png",
+        image: "/project images/kfupmlms.png",
         url: "https://www.behance.net/gallery/218659483/KFUPM-LMS-concept"
       },
       {
