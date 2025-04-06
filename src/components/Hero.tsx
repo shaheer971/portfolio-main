@@ -31,7 +31,7 @@ const Hero = () => {
           >
             <div className="w-12 h-12 rounded-md overflow-hidden border border-white/20">
               <img 
-                src="/pfp.png" 
+                src="/pfp.jpeg" 
                 alt="Profile" 
                 className="w-full h-full object-cover"
               />
