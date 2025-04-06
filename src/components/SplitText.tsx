@@ -1,5 +1,5 @@
 
-import { useSprings, animated } from '@react-spring/web';
+import { useSprings, animated, config as springConfig } from '@react-spring/web';
 import { useEffect, useRef, useState } from 'react';
 
 interface SplitTextProps {
@@ -8,10 +8,10 @@ interface SplitTextProps {
   delay?: number;
   animationFrom?: any;
   animationTo?: any;
-  easing?: string;
+  easing?: keyof typeof springConfig;
   threshold?: number;
   rootMargin?: string;
-  textAlign?: string;
+  textAlign?: 'left' | 'center' | 'right';
   onWordAnimationComplete?: () => void;
 }
 
@@ -66,7 +66,7 @@ const SplitText = ({
         }
         : animationFrom,
       delay: i * delay,
-      config: { easing },
+      config: springConfig[easing as keyof typeof springConfig],
     }))
   );
 
