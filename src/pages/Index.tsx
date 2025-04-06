@@ -30,7 +30,7 @@ const Index = () => {
         </div>
       </div>
       
-      {/* Ventures section now comes before Projects */}
+      {/* Ventures section comes before Projects */}
       <Ventures />
       
       <div className="relative">
@@ -42,7 +42,7 @@ const Index = () => {
         </div>
       </div>
       
-      {/* Projects section now comes after Ventures */}
+      {/* Projects section comes after Ventures */}
       <Projects />
       
       <div className="relative">
