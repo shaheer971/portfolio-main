@@ -12,7 +12,7 @@ type Venture = {
 const ventures: Venture[] = [{
   id: 1,
   name: "onliversity.com",
-  description: "Supercharge your learning with AI",
+  description: "The new way to learn",
   url: "https://onliversity.com"
 }, {
   id: 2,
@@ -27,24 +27,19 @@ const ventures: Venture[] = [{
 }, {
   id: 4,
   name: "tazkiyah.app",
-  description: "Simplify habit building as a Muslim",
+  description: "Simplify habit building",
   url: "https://tazkiyah.netlify.app"
 }, {
   id: 5,
   name: "askify.ai",
-  description: "Your browser's built-in AI mind",
+  description: "Chat with any website",
   url: "https://askifyapp.netlify.app"
 }, {
   id: 6,
   name: "tahseen.health",
-  description: "Simplify your health tracking",
+  description: "Simplify health tracking",
   url: "https://tahseen.health"
-}, {
-  id: 7,
-  name: "youtube.pro",
-  description: "Enhance your Youtube experience with an all-in-one extension",
-  url: "https://ytpro.netlify.app"
-}];
+},];
 
 const Ventures = () => {
   return (
@@ -66,7 +61,7 @@ const Ventures = () => {
           </h2>
         </div>
         
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-2">
+        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-3">
           {ventures.map(venture => (
             <a 
               key={venture.id} 
