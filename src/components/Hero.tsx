@@ -2,7 +2,6 @@
 import { motion } from "framer-motion";
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 import SplitText from "./SplitText";
-import GradientText from "./GradientText";
 
 const Hero = () => {
   return (
@@ -14,7 +13,7 @@ const Hero = () => {
       
       <div className="content-container relative">
         <div className="flex flex-col items-start max-w-3xl mx-0 py-0">
-          {/* Profile Picture */}
+          {/* Profile Picture with hover effect */}
           <motion.div
             initial={{
               opacity: 0,
@@ -23,6 +22,11 @@ const Hero = () => {
             animate={{
               opacity: 1,
               scale: 1
+            }}
+            whileHover={{
+              scale: 1.1,
+              rotate: 3,
+              transition: { duration: 0.2 }
             }}
             transition={{
               duration: 0.6
@@ -40,7 +44,7 @@ const Hero = () => {
           
           {/* Hero Text with SplitText */}
           <div className="md:text-6xl leading-tight md:leading-tight tracking-tight lg:text-2xl text-2xl font-semibold py-[7px] md:pt-[20px]">
-            <div className="text-gradient block font-extrabold">
+            <div className="block font-extrabold text-white">
               <SplitText 
                 text="Hey, I'm Shaheer,"
                 delay={150}
@@ -50,7 +54,7 @@ const Hero = () => {
                 animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
               />
             </div>
-            <div className="inline-block mt-1 font-medium">
+            <div className="inline-block mt-1 font-medium text-white">
               <SplitText 
                 text="an aspiring"
                 delay={150}
@@ -59,22 +63,14 @@ const Hero = () => {
                 animationFrom={{ opacity: 0, transform: 'translate3d(0,20px,0)' }}
                 animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
               />
-              <span className="inline-flex">
-                <GradientText
-                  colors={["#40ffaa", "#4079ff", "#40ffaa"]}
-                  animationSpeed={3}
-                  className="font-instrument italic font-thin text-2xl inline-block mx-2"
-                >
+              <span className="inline-flex items-center">
+                <span className="font-instrument italic font-thin text-2xl inline-block mx-2">
                   designer
-                </GradientText>
+                </span>
                 {" "}  &  {" "}
-                <GradientText
-                  colors={["#ff40aa", "#ff4079", "#ff40aa"]}
-                  animationSpeed={3}
-                  className="font-instrument italic font-thin text-2xl inline-block"
-                >
+                <span className="font-instrument italic font-thin text-2xl inline-block">
                   developer
-                </GradientText>
+                </span>
               </span>
               <span className="ml-2">.</span>
             </div>
