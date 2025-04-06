@@ -26,7 +26,7 @@ const projectCategories: ProjectCategory[] = [
         id: 1,
         title: "Hackathon website",
         description: "A modern website for hackathon events",
-        image: "/project%20images/bolt1.png",
+        image: "/project images/bolt1.png",
         url: "#"
       },
       {
