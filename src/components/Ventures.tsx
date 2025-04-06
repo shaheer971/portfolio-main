@@ -39,11 +39,6 @@ const ventures: Venture[] = [{
   name: "tahseen.health",
   description: "Simplify your health tracking",
   url: "https://tahseen.health"
-}, {
-  id: 7,
-  name: "youtube.pro",
-  description: "Enhance your Youtube experience with an all-in-one extension",
-  url: "https://ytpro.netlify.app"
 }];
 
 const Ventures = () => {
@@ -71,7 +66,7 @@ const Ventures = () => {
             <a 
               key={venture.id} 
               href={venture.url} 
-              className="group p-6 rounded-lg border border-white/10 hover:border-white/90 hover:bg-white/5 transition-all duration-300" 
+              className="group p-4 rounded-lg border border-white/10 hover:border-white/90 hover:bg-white/5 transition-all duration-300" 
               target="_blank" 
               rel="noopener noreferrer"
             >
@@ -86,7 +81,7 @@ const Ventures = () => {
                 </h4>
                 <ArrowUpRight className="h-5 w-5 text-white/40 group-hover:text-white transition-colors" />
               </div>
-              <p className="mt-3 text-white/60 text-sm leading-relaxed">
+              <p className="mt-2 text-white/60 text-sm leading-relaxed">
                 <DecryptedText 
                   text={venture.description}
                   animateOn="view"

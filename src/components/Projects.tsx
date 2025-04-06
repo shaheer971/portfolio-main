@@ -1,4 +1,3 @@
-
 import { useRef, useState, useEffect, useMemo } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
@@ -231,8 +230,7 @@ const Projects = () => {
             </h2>
           </div>
           
-          {/* Filter Menu */}
-          <div className="content-container mb-6">
+          <div className="w-full mb-4 px-4">
             <div className="w-full grid grid-cols-2 sm:grid-cols-3 md:flex md:items-center gap-2 p-1.5 rounded-full border border-white/10 bg-white/[0.02] overflow-x-auto scrollbar-hidden backdrop-blur-xl">
               {categories.map((category) => (
                 <button
@@ -254,9 +252,8 @@ const Projects = () => {
             </div>
           </div>
 
-          {/* Projects Grid */}
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+          <div className="px-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {filteredProjects.map((project, index) => (
                 <motion.div 
                   key={project.id}
@@ -271,7 +268,6 @@ const Projects = () => {
                     rel="noopener noreferrer"
                     className="block rounded-xl border border-white/10 p-3 space-y-4 bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-300"
                   >
-                    {/* Project Image */}
                     <div className="relative rounded-lg overflow-hidden border border-white/10">
                       <AspectRatio ratio={16/9} className="bg-secondary">
                         <OptimizedImage 
@@ -281,7 +277,6 @@ const Projects = () => {
                       </AspectRatio>
                     </div>
                     
-                    {/* Project Header */}
                     <div className="flex items-start justify-between">
                       <h3 className="text-left font-medium">
                         <DecryptedText 
