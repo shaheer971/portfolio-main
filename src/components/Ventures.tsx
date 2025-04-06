@@ -21,9 +21,9 @@ const ventures: Venture[] = [{
   url: "https://mujtama.netlify.app"
 }, {
   id: 3,
-  name: "supersi.de",
+  name: "superside",
   description: "Browser productivity Sidebar",
-  url: "https://superside.netlify.app"
+  url: "https://supersideapp.netlify.app"
 }, {
   id: 4,
   name: "tazkiyah.app",
@@ -61,12 +61,12 @@ const Ventures = () => {
           </h2>
         </div>
         
-        <div className="mt-5 grid grid-cols-1 md:grid-cols-2 gap-2">
+        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-2">
           {ventures.map(venture => (
             <a 
               key={venture.id} 
               href={venture.url} 
-              className="group p-4 rounded-lg border border-white/10 hover:border-white/90 hover:bg-white/5 transition-all duration-300" 
+              className="group p-6 rounded-lg border border-white/10 hover:border-white/90 hover:bg-white/5 transition-all duration-300" 
               target="_blank" 
               rel="noopener noreferrer"
             >
