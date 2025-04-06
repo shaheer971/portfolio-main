@@ -1,117 +1,18 @@
-import { useRef, useState, useEffect, lazy, Suspense } from "react";
-import { ArrowLeft, ArrowRight } from "lucide-react";
-import { cn } from "@/lib/utils";
+
+import { useRef, useState, useEffect, useMemo } from "react";
+import { ArrowUpRight } from "lucide-react";
+import { motion } from "framer-motion";
 import DecryptedText from "./DecryptedText";
 import { AspectRatio } from "./ui/aspect-ratio";
 import { Skeleton } from "./ui/skeleton";
 
 type Project = {
-  id: number;
+  id: string;
   title: string;
-  description: string;
+  tags: string[];
   image: string;
-  url: string;
+  link: string;
 };
-
-type ProjectCategory = {
-  title: string;
-  projects: Project[];
-};
-
-const projectCategories: ProjectCategory[] = [
-  {
-    title: "Web Design",
-    projects: [
-      {
-        id: 1,
-        title: "Hackathon website",
-        description: "A modern website for hackathon events",
-        image: "/project images/bolt1.png",
-        url: "#"
-      },
-      {
-        id: 2,
-        title: "University LMS concept",
-        description: "Learning management system concept for KFUPM",
-        image: "/project images/kfupmlms.png",
-        url: "https://www.behance.net/gallery/218659483/KFUPM-LMS-concept"
-      },
-      {
-        id: 3,
-        title: "Askify landing",
-        description: "Landing page for AI-powered search assistant",
-        image: "/project%20images/askify.png",
-        url: "#"
-      },
-      {
-        id: 4,
-        title: "Hackathon concept",
-        description: "Modern concept for hackathon platform",
-        image: "/project%20images/bolt2.png",
-        url: "#"
-      },
-      {
-        id: 5,
-        title: "Saas landing",
-        description: "Landing page for SaaS platform",
-        image: "/project%20images/nextai.png",
-        url: "#"
-      },
-      {
-        id: 6,
-        title: "Consultancy landing",
-        description: "Landing page for consultancy services",
-        image: "/project%20images/onliverse.png",
-        url: "#"
-      },
-      {
-        id: 7,
-        title: "LMS concept",
-        description: "Learning management system concept",
-        image: "/project%20images/wiselearn.png",
-        url: "#"
-      }
-    ]
-  },
-  {
-    title: "Branding",
-    projects: [
-      {
-        id: 8,
-        title: "askify brand identity",
-        description: "Brand identity design for Askify",
-        image: "/project%20images/askifylogo.png",
-        url: "#"
-      },
-      {
-        id: 9,
-        title: "fayda concept",
-        description: "Brand concept for financial platform",
-        image: "/project%20images/fayda%20logo.png",
-        url: "#"
-      },
-      {
-        id: 10,
-        title: "EMRE brand identity",
-        description: "Brand identity for photography business",
-        image: "/project%20images/emre.png",
-        url: "#"
-      }
-    ]
-  },
-  {
-    title: "Other",
-    projects: [
-      {
-        id: 11,
-        title: "TWLM poster",
-        description: "Poster design for mobile application",
-        image: "/project%20images/twlm.png",
-        url: "#"
-      }
-    ]
-  }
-];
 
 const OptimizedImage = ({ src, alt, className = "" }: { src: string; alt: string; className?: string }) => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -128,22 +29,16 @@ const OptimizedImage = ({ src, alt, className = "" }: { src: string; alt: string
         loading="lazy"
         onLoad={() => setIsLoaded(true)}
         onError={() => setError(true)}
-        className={cn(
-          "w-full h-full object-cover transition-opacity duration-300",
-          isLoaded ? "opacity-100" : "opacity-0",
-          className
-        )}
+        className={`w-full h-full object-cover transition-all duration-700 group-hover:scale-105 ${isLoaded ? "opacity-100" : "opacity-0"}`}
       />
     </div>
   );
 };
 
-const ProjectSection = ({ category }: { category: ProjectCategory }) => {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true);
-  const [activeIndex, setActiveIndex] = useState(0);
+const Projects = () => {
+  const [selectedCategory, setSelectedCategory] = useState("Featured");
   const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
   
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -153,182 +48,258 @@ const ProjectSection = ({ category }: { category: ProjectCategory }) => {
       { threshold: 0.1 }
     );
     
-    if (scrollRef.current) {
-      observer.observe(scrollRef.current);
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
     }
     
     return () => {
-      if (scrollRef.current) {
-        observer.unobserve(scrollRef.current);
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
       }
     };
   }, []);
 
-  const handleScroll = () => {
-    if (scrollRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-      
-      setCanScrollLeft(scrollLeft > 20);
-      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 20);
-      
-      const projectWidth = clientWidth;
-      const newActiveIndex = Math.round(scrollLeft / projectWidth);
-      setActiveIndex(Math.min(Math.max(0, newActiveIndex), category.projects.length - 1));
+  const projects: Project[] = useMemo(() => [
+    {
+      id: "kfupm-lms",
+      title: "Concept University LMS",
+      tags: ["Product Design", "React.js", "Node.js", "Featured"],
+      image: "/project images/kfupmlms.png",
+      link: "https://www.behance.net/gallery/218659483/KFUPM-LMS-concept"
+    },
+    {
+      id: "bolt1",
+      title: "Hackathon Hero concept",
+      tags: ["Web Design", "React.js", "All"],
+      image: "/project images/bolt1.png",
+      link: "#"
+    },
+    {
+      id: "askify",
+      title: "Askify landing",
+      tags: ["Web Design", "React.js", "All"],
+      image: "/project images/askify.png",
+      link: "https://getaskify.netlify.app"
+    },
+    {
+      id: "bolt2",
+      title: "Bolt Hackathon Hero",
+      tags: ["Web Design", "React.js", "All"],
+      image: "/project images/bolt2.png",
+      link: "#"
+    },
+    {
+      id: "nextai",
+      title: "Next AI landing template",
+      tags: ["Web Design", "React.js", "All"],
+      image: "/project images/nextai.png",
+      link: "https://next-ai-landing.netlify.app"
+    },
+    {
+      id: "superside",
+      title: "Superside landing",
+      tags: ["Web Design", "React.js", "All"],
+      image: "/project images/superside.png",
+      link: "https://supersideapp.netlify.app"
+    },
+    {
+      id: "onliverse",
+      title: "Onliverse landing",
+      tags: ["Web Design", "React.js", "All"],
+      image: "/project images/onliverse.png",
+      link: "https://onliversetech.netlify.app"
+    },
+    {
+      id: "sea",
+      title: "SEA Landing",
+      tags: ["Web Design", "WordPress", "Figma"],
+      image: "/project images/sea.png",
+      link: "https://www.behance.net/gallery/219903085/SEA-protection-services-website-development"
+    },
+    {
+      id: "ereader",
+      title: "Embellisher eReader dashboard",
+      tags: ["Product Design", "Figma"],
+      image: "/project images/ereader.png",
+      link: "https://www.behance.net/gallery/220152297/Embellisher-eReader-dashboard-designs"
+    },
+    {
+      id: "wiselearn",
+      title: "E-learning dashboard concept",
+      tags: ["Product Design", "React.js", "Concept"],
+      image: "/project images/wiselearn.png",
+      link: "https://www.behance.net/gallery/220505775/Elearning-dashboard-concept"
+    },
+    {
+      id: "fayda-digital",
+      title: "Fayda Digital onboarding",
+      tags: ["App Design", "Figma", "Featured"],
+      image: "/project images/fayda digital.png",
+      link: "https://www.behance.net/gallery/172586225/Fayda-Digital-UI-design"
+    },
+    {
+      id: "askify-logo",
+      title: "Askify identity",
+      tags: ["Brand Identity", "Logo Design", "Concept"],
+      image: "/project images/askifylogo.png",
+      link: "#"
+    },
+    {
+      id: "fayda-logo",
+      title: "Fayda Digital logo concept",
+      tags: ["Brand Identity", "Logo Design", "Concept"],
+      image: "/project images/fayda logo.png",
+      link: "#"
+    },
+    {
+      id: "bestglobal",
+      title: "Best Global AI brand identity",
+      tags: ["Brand Identity", "Logo Design"],
+      image: "/project images/bestglobal.png",
+      link: "#"
+    },
+    {
+      id: "versatility-works",
+      title: "Versatility Works brand identity",
+      tags: ["Brand Identity", "Logo Design"],
+      image: "/project images/versatility works.png",
+      link: "https://www.behance.net/gallery/200149573/Versatility-works-Brand-guidelines"
+    },
+    {
+      id: "esme",
+      title: "ESME brand identity",
+      tags: ["Brand Identity", "Logo Design"],
+      image: "/project images/emre.png",
+      link: "#"
+    },
+    {
+      id: "twlm",
+      title: "TWLM app poster",
+      tags: ["Other", "Poster Design", "Concept"],
+      image: "/project images/twlm.png",
+      link: "https://www.behance.net/gallery/200150477/App-poster-design-Twlm"
     }
+  ], []);
+
+  const categories = useMemo(() => [
+    "Featured",
+    "Web Design",
+    "Product Design",
+    "App Design",
+    "Brand Identity",
+    "Other"
+  ], []);
+
+  const filteredProjects = useMemo(() => {
+    if (selectedCategory === "Featured") {
+      return projects.filter(project => 
+        ["superside", "bolt1", "bolt2", "nextai", "askify", "kfupm-lms", "onliverse", "fayda-digital"].includes(project.id)
+      );
+    }
+    return projects.filter(project => 
+      project.tags.includes(selectedCategory)
+    );
+  }, [projects, selectedCategory]);
+
+  const fadeIn = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0, transition: { duration: 0.6 } }
   };
-  
-  useEffect(() => {
-    const scrollContainer = scrollRef.current;
-    if (scrollContainer) {
-      scrollContainer.addEventListener('scroll', handleScroll);
-      handleScroll();
-      return () => scrollContainer.removeEventListener('scroll', handleScroll);
-    }
-  }, []);
-  
-  const scrollToProject = (index: number) => {
-    if (scrollRef.current) {
-      const containerWidth = scrollRef.current.clientWidth;
-      const targetScroll = index * containerWidth;
-      
-      scrollRef.current.scrollTo({
-        left: targetScroll,
-        behavior: 'smooth'
-      });
-      
-      setActiveIndex(index);
-    }
-  };
-  
-  const scroll = (direction: 'left' | 'right') => {
-    if (direction === 'left') {
-      scrollToProject(Math.max(0, activeIndex - 1));
-    } else {
-      scrollToProject(Math.min(category.projects.length - 1, activeIndex + 1));
-    }
-  };
-  
-  useEffect(() => {
-    if (isVisible) {
-      const timer = setTimeout(() => {
-        scrollToProject(0);
-      }, 200);
-      
-      return () => clearTimeout(timer);
-    }
-  }, [isVisible]);
 
   return (
-    <div className="mb-4 last:mb-0">
-      <div className="content-container mb-6">
-        <div className="flex justify-between items-end">
-          <div>
+    <section 
+      id="work" 
+      ref={sectionRef}
+      className="relative my-0 py-[40px] slide-up overflow-hidden"
+      style={{ animationDelay: '0.2s' }}
+    >
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 left-0 w-px h-full bg-gradient-to-b from-transparent via-white/10 to-transparent opacity-30" />
+        <div className="absolute top-0 right-0 w-px h-full bg-gradient-to-b from-transparent via-white/10 to-transparent opacity-30" />
+      </div>
+      
+      <div className="container mx-auto max-w-full relative">
+        <div className={`transition-all duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+          <div className="content-container mb-8">
             <h2 className="text-xl text-white/60">
               <DecryptedText 
-                text={category.title} 
-                animateOn="both"
+                text="Work"
+                animateOn="view"
                 speed={50}
                 sequential={true}
               />
             </h2>
           </div>
           
-          <div className="flex items-center gap-2">
-            <button 
-              onClick={() => scroll('left')} 
-              className={cn(
-                "p-2 rounded-full border border-white/10 transition-all duration-300", 
-                canScrollLeft ? "hover:bg-white/5 text-white" : "text-white/20 cursor-not-allowed"
-              )} 
-              disabled={!canScrollLeft}
-              aria-label="Previous project"
-            >
-              <ArrowLeft className="h-5 w-5" />
-            </button>
-            <button 
-              onClick={() => scroll('right')} 
-              className={cn(
-                "p-2 rounded-full border border-white/10 transition-all duration-300", 
-                canScrollRight ? "hover:bg-white/5 text-white" : "text-white/20 cursor-not-allowed"
-              )} 
-              disabled={!canScrollRight}
-              aria-label="Next project"
-            >
-              <ArrowRight className="h-5 w-5" />
-            </button>
+          {/* Filter Menu */}
+          <div className="content-container mb-6">
+            <div className="w-full grid grid-cols-2 sm:grid-cols-3 md:flex md:items-center gap-2 p-1.5 rounded-full border border-white/10 bg-white/[0.02] overflow-x-auto scrollbar-hidden backdrop-blur-xl">
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  onClick={() => setSelectedCategory(category)}
+                  className={`w-full md:flex-1 px-4 md:px-6 py-2 text-sm font-medium rounded-full transition-all duration-300 whitespace-nowrap
+                    ${category === selectedCategory
+                      ? "bg-white/10 text-white shadow-[inset_0px_1px_0px_0px_rgba(255,255,255,0.1)]" 
+                      : "text-white/60 hover:text-white hover:bg-white/5"
+                    }`}
+                >
+                  <DecryptedText 
+                    text={category}
+                    animateOn="hover"
+                    speed={30}
+                  />
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Projects Grid */}
+          <div className="container mx-auto px-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+              {filteredProjects.map((project, index) => (
+                <motion.div 
+                  key={project.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="group"
+                >
+                  <a 
+                    href={project.link} 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block rounded-xl border border-white/10 p-3 space-y-4 bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-300"
+                  >
+                    {/* Project Image */}
+                    <div className="relative rounded-lg overflow-hidden border border-white/10">
+                      <AspectRatio ratio={16/9} className="bg-secondary">
+                        <OptimizedImage 
+                          src={project.image} 
+                          alt={project.title} 
+                        />
+                      </AspectRatio>
+                    </div>
+                    
+                    {/* Project Header */}
+                    <div className="flex items-start justify-between">
+                      <h3 className="text-left font-medium">
+                        <DecryptedText 
+                          text={project.title}
+                          animateOn="hover"
+                          speed={30}
+                          sequential={true}
+                        />
+                      </h3>
+                      <ArrowUpRight className="w-4 h-4 text-white/40 group-hover:text-white transition-colors" />
+                    </div>
+                  </a>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
-      
-      <div className="relative content-container overflow-visible">
-        <div 
-          ref={scrollRef} 
-          className="flex w-full overflow-x-auto snap-x snap-mandatory scrollbar-hidden pb-10" 
-          style={{ scrollSnapType: 'x mandatory' }}
-        >
-          {category.projects.map((project, index) => (
-            <div 
-              key={project.id} 
-              className="w-full flex-shrink-0 snap-center px-4 first:pl-0 last:pr-0"
-              style={{
-                scrollSnapAlign: 'center',
-                opacity: Math.abs(index - activeIndex) === 0 ? 1 : 0.3,
-                transition: 'opacity 0.3s ease',
-                transform: index < activeIndex ? 'translateX(-5%)' : (index > activeIndex ? 'translateX(5%)' : 'scale(1)'),
-                visibility: 'visible',
-                pointerEvents: activeIndex === index ? 'auto' : 'none',
-              }}
-            >
-              <a 
-                href={project.url} 
-                className="block w-full"
-                target="_blank" 
-                rel="noopener noreferrer"
-              >
-                <div className="overflow-hidden">
-                  <AspectRatio ratio={16/9} className="bg-secondary">
-                    <OptimizedImage 
-                      src={project.image} 
-                      alt={project.title} 
-                    />
-                  </AspectRatio>
-                </div>
-                <h3 className="mt-4 font-medium text-white transition-colors text-lg">
-                  <DecryptedText 
-                    text={project.title}
-                    animateOn={isVisible ? "both" : "hover"}
-                    speed={40}
-                    sequential={true}
-                  />
-                </h3>
-                <p className="mt-2 text-sm text-white/60 leading-relaxed">
-                  <DecryptedText 
-                    text={project.description}
-                    animateOn={isVisible ? "both" : "hover"}
-                    speed={30}
-                    sequential={true}
-                  />
-                </p>
-              </a>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const Projects = () => {
-  return (
-    <section id="work" style={{ animationDelay: '0.2s' }} className="relative slide-up my-0 py-[40px] overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-0 w-px h-full bg-gradient-to-b from-transparent via-white/10 to-transparent opacity-30" />
-        <div className="absolute top-0 right-0 w-px h-full bg-gradient-to-b from-transparent via-white/10 to-transparent opacity-30" />
-      </div>
-      
-      {projectCategories.map((category, index) => (
-        <ProjectSection key={index} category={category} />
-      ))}
     </section>
   );
 };

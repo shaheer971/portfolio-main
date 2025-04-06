@@ -20,6 +20,7 @@ const Index = () => {
       
       <Navbar />
       <Hero />
+      
       <div className="relative">
         <div className="content-container relative">
           <div className="absolute left-[-30px] right-[-30px] h-px bg-white/10">
@@ -28,16 +29,10 @@ const Index = () => {
           </div>
         </div>
       </div>
-      <Projects />
-      <div className="relative">
-        <div className="content-container relative">
-          <div className="absolute left-[-30px] right-[-30px] h-px bg-white/10">
-            <div className="absolute -top-1 left-0 w-2 h-2 bg-white rotate-45" />
-            <div className="absolute -top-1 right-0 w-2 h-2 bg-white rotate-45" />
-          </div>
-        </div>
-      </div>
+      
+      {/* Ventures section now comes before Projects */}
       <Ventures />
+      
       <div className="relative">
         <div className="content-container relative">
           <div className="absolute left-[-30px] right-[-30px] h-px bg-white/10">
@@ -46,7 +41,21 @@ const Index = () => {
           </div>
         </div>
       </div>
+      
+      {/* Projects section now comes after Ventures */}
+      <Projects />
+      
+      <div className="relative">
+        <div className="content-container relative">
+          <div className="absolute left-[-30px] right-[-30px] h-px bg-white/10">
+            <div className="absolute -top-1 left-0 w-2 h-2 bg-white rotate-45" />
+            <div className="absolute -top-1 right-0 w-2 h-2 bg-white rotate-45" />
+          </div>
+        </div>
+      </div>
+      
       <Disciplines />
+      
       <div className="relative">
         <div className="content-container relative">
           <div className="absolute left-[-30px] right-[-30px] h-px bg-white/10">
@@ -55,6 +64,7 @@ const Index = () => {
           </div>
         </div>
       </div>
+      
       <Contact />
       <Footer />
     </div>
