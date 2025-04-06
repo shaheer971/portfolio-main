@@ -1,3 +1,4 @@
+
 import { useRef, useState, useEffect, useMemo } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
@@ -153,6 +154,13 @@ const Projects = () => {
       link: "#"
     },
     {
+      id: "mujtama-logo",
+      title: "Mujtama identity",
+      tags: ["Brand Identity", "Logo Design"],
+      image: "/project images/mujtama logo.png",
+      link: "#"
+    },
+    {
       id: "bestglobal",
       title: "Best Global AI brand identity",
       tags: ["Brand Identity", "Logo Design"],
@@ -207,7 +215,7 @@ const Projects = () => {
     animate: { opacity: 1, y: 0, transition: { duration: 0.6 } }
   };
 
-  const mobileContentPadding = isMobile ? 'px-2' : 'px-4';
+  const mobileContentPadding = isMobile ? 'px-1' : 'px-2';
 
   return (
     <section 
@@ -224,7 +232,7 @@ const Projects = () => {
       <div className="container mx-auto max-w-full relative">
         <div className={`transition-all duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
           <div className={`w-full mb-4 ${mobileContentPadding}`}>
-            <div className={`w-full grid grid-cols-2 sm:grid-cols-3 md:flex md:items-center gap-2 p-1.5 rounded-full ${!isMobile ? 'border border-white/10 bg-white/[0.02]' : ''} overflow-x-auto scrollbar-hidden backdrop-blur-xl`}>
+            <div className={`w-full grid grid-cols-2 sm:grid-cols-3 md:flex md:items-center gap-2 p-1.5 overflow-x-auto scrollbar-hidden ${!isMobile ? 'rounded-full border border-white/10 bg-white/[0.02] backdrop-blur-xl' : ''}`}>
               {categories.map((category) => (
                 <button
                   key={category}

@@ -54,15 +54,25 @@ const Hero = () => {
                 animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
               />
             </div>
-            <div className="inline-block mt-1 font-medium text-white">
+            <div className="inline-block mt-1 font-bold text-white">
               <SplitText 
-                text="an aspiring designer and developer."
+                text="an aspiring"
                 delay={150}
                 textAlign="left"
                 threshold={0.2}
                 animationFrom={{ opacity: 0, transform: 'translate3d(0,20px,0)' }}
                 animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
               />
+              <span className="inline-flex items-center">
+                <span className="font-instrument italic font-light text-2xl inline-block mx-1">
+                  designer
+                </span>
+                <span className="font-bold mx-1">&</span>
+                <span className="font-instrument italic font-light text-2xl inline-block">
+                  developer
+                </span>
+              </span>
+              <span className="ml-1">.</span>
             </div>
           </div>
           
