@@ -56,23 +56,13 @@ const Hero = () => {
             </div>
             <div className="inline-block mt-1 font-medium text-white">
               <SplitText 
-                text="an aspiring"
+                text="an aspiring designer and developer."
                 delay={150}
                 textAlign="left"
                 threshold={0.2}
                 animationFrom={{ opacity: 0, transform: 'translate3d(0,20px,0)' }}
                 animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
               />
-              <span className="inline-flex items-center">
-                <span className="font-instrument italic font-thin text-2xl inline-block mx-2">
-                  designer
-                </span>
-                {" "}  &  {"  "}
-                <span className="font-instrument italic font-thin text-2xl inline-block">
-                   developer
-                </span>
-              </span>
-              <span className="ml-2">.</span>
             </div>
           </div>
           

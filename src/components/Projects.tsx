@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import DecryptedText from "./DecryptedText";
 import { AspectRatio } from "./ui/aspect-ratio";
 import { Skeleton } from "./ui/skeleton";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 type Project = {
   id: string;
@@ -38,6 +39,7 @@ const Projects = () => {
   const [selectedCategory, setSelectedCategory] = useState("Featured");
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+  const isMobile = useIsMobile();
   
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -205,6 +207,8 @@ const Projects = () => {
     animate: { opacity: 1, y: 0, transition: { duration: 0.6 } }
   };
 
+  const mobileContentPadding = isMobile ? 'px-2' : 'px-4';
+
   return (
     <section 
       id="work" 
@@ -219,19 +223,8 @@ const Projects = () => {
       
       <div className="container mx-auto max-w-full relative">
         <div className={`transition-all duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-          <div className="content-container mb-8">
-            <h2 className="text-xl text-white/60">
-              <DecryptedText 
-                text="Work"
-                animateOn="view"
-                speed={50}
-                sequential={true}
-              />
-            </h2>
-          </div>
-          
-          <div className="w-full mb-4 px-4">
-            <div className="w-full grid grid-cols-2 sm:grid-cols-3 md:flex md:items-center gap-2 p-1.5 rounded-full border border-white/10 bg-white/[0.02] overflow-x-auto scrollbar-hidden backdrop-blur-xl">
+          <div className={`w-full mb-4 ${mobileContentPadding}`}>
+            <div className={`w-full grid grid-cols-2 sm:grid-cols-3 md:flex md:items-center gap-2 p-1.5 rounded-full ${!isMobile ? 'border border-white/10 bg-white/[0.02]' : ''} overflow-x-auto scrollbar-hidden backdrop-blur-xl`}>
               {categories.map((category) => (
                 <button
                   key={category}
@@ -252,7 +245,7 @@ const Projects = () => {
             </div>
           </div>
 
-          <div className="px-4">
+          <div className={mobileContentPadding}>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {filteredProjects.map((project, index) => (
                 <motion.div 
