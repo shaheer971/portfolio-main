@@ -31,7 +31,7 @@ const Hero = () => {
             transition={{
               duration: 0.6
             }}
-            className="mb-4"
+            className="mb-2"
           >
             <div className="w-12 h-12 rounded-md overflow-hidden border border-white/20">
               <img 
@@ -67,9 +67,9 @@ const Hero = () => {
                 <span className="font-instrument italic font-thin text-2xl inline-block mx-2">
                   designer
                 </span>
-                {" "}  &  {" "}
+                {" "}  &  {"  "}
                 <span className="font-instrument italic font-thin text-2xl inline-block">
-                  developer
+                   developer
                 </span>
               </span>
               <span className="ml-2">.</span>
