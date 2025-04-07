@@ -17,15 +17,16 @@ const disciplines = [{
   id: 4,
   name: "back-end systems",
   description: "Architecting robust server-side solutions and API integrations"
-}, {
-  id: 5,
-  name: "product strategy",
-  description: "Defining product vision and roadmap to achieve business objectives"
-}, {
-  id: 6,
-  name: "design systems",
-  description: "Establishing scalable design languages and component libraries"
-}];
+}
+//                      {
+//   id: 5,
+//   name: "product strategy",
+//   description: "Defining product vision and roadmap to achieve business objectives"
+// }, {
+//   id: 6,
+//   name: "design systems",
+//   description: "Establishing scalable design languages and component libraries"
+// }];
 
 const Disciplines = () => {
   return (
@@ -47,9 +48,9 @@ const Disciplines = () => {
           </h2>
         </div>
         
-        <div className="mt-12 space-y-6 my-[23px]">
+        <div className="mt-8 space-y-4 my-[23px]">
           {disciplines.map(discipline => (
-            <div key={discipline.id} className="pb-6 border-b border-white/5 hover:border-white/10 transition-colors duration-300 group">
+            <div key={discipline.id} className="pb-4 border-b border-white/5 hover:border-white/10 transition-colors duration-300 group">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between">
                 <h4 className="font-medium group-hover:text-gradient transition-all duration-300 md:text-xl text-lg">
                   <DecryptedText 
