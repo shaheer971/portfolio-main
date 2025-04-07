@@ -114,6 +114,11 @@ const Hero = () => {
               href="https://cal.com/shaheerahmar/15min"
               className="w-40 p-2.5 border-white/20 text-white"
             />
+            <InteractiveHoverButton 
+              text="View work"
+              href="https://www.behance.net/shaheerahmar"
+              className="w-40 p-2.5 border-white/20 text-white"
+            />
           </motion.div>
         </div>
       </div>

@@ -4,6 +4,7 @@ import Hero from "@/components/Hero";
 import Projects from "@/components/Projects";
 import Ventures from "@/components/Ventures";
 import Disciplines from "@/components/Disciplines";
+import Services from "@/components/Services";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
@@ -55,6 +56,18 @@ const Index = () => {
       </div>
       
       <Disciplines />
+      
+      <div className="relative">
+        <div className="content-container relative">
+          <div className="absolute left-[-30px] right-[-30px] h-px bg-white/10">
+            <div className="absolute -top-1 left-0 w-2 h-2 bg-white rotate-45" />
+            <div className="absolute -top-1 right-0 w-2 h-2 bg-white rotate-45" />
+          </div>
+        </div>
+      </div>
+      
+      {/* Add Services section after Disciplines */}
+      <Services />
       
       <div className="relative">
         <div className="content-container relative">
