@@ -17,9 +17,16 @@ const devPackages = [
       "Front-end development",
       "Basic back-end setup",
       "User authentication",
-      "2-4 week delivery"
+      "2-4 week delivery",
+      "Deployment to production",
+      "Basic database schema",
+      "API integration",
+      "Cross-browser testing",
+      "Simple admin panel",
+      "Analytics setup",
+      "Technical documentation"
     ],
-    tech: ["React", "Next.js", "Firebase"]
+    tech: ["React", "Next.js", "Firebase", "Vercel", "Tailwind CSS"]
   },
   {
     title: "Web App",
@@ -30,9 +37,18 @@ const devPackages = [
       "Robust back-end architecture",
       "Database integration",
       "API development",
-      "Admin dashboard"
+      "Admin dashboard",
+      "Authentication & Authorization",
+      "Realtime data updates",
+      "Search & filtering capability",
+      "Payment integration",
+      "Email notifications",
+      "Performance optimization",
+      "Security best practices",
+      "Automated testing",
+      "CI/CD pipeline setup"
     ],
-    tech: ["React", "Node.js", "MongoDB", "AWS/Vercel"]
+    tech: ["React", "Node.js", "MongoDB", "AWS/Vercel", "Redux", "GraphQL"]
   },
   {
     title: "Mobile App",
@@ -43,9 +59,40 @@ const devPackages = [
       "Native UI components",
       "Backend integration",
       "Push notifications",
-      "App store submission support"
+      "App store submission support",
+      "Offline functionality",
+      "Camera/media integration",
+      "Location services",
+      "Social authentication",
+      "Deep linking",
+      "In-app purchases",
+      "Analytics implementation",
+      "Crash reporting",
+      "Performance optimization"
     ],
-    tech: ["React Native", "Expo", "Firebase"]
+    tech: ["React Native", "Expo", "Firebase", "Redux", "Native Modules"]
+  },
+  {
+    title: "E-commerce Solution",
+    price: "$5,999+",
+    description: "Complete online store with product management and payment processing.",
+    features: [
+      "Product catalog",
+      "Shopping cart functionality",
+      "Secure checkout process",
+      "Payment gateway integration",
+      "Order management",
+      "Customer accounts",
+      "Inventory tracking",
+      "Discount codes",
+      "Product reviews",
+      "Search and filtering",
+      "Mobile-responsive design",
+      "Analytics and reporting",
+      "Email notifications",
+      "SEO optimization"
+    ],
+    tech: ["Next.js", "Shopify API", "Stripe", "PostgreSQL", "Redis"]
   }
 ];
 
@@ -152,7 +199,7 @@ const Development = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {devPackages.map((pkg, index) => (
             <DevelopmentPackageCard
               key={index}

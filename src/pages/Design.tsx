@@ -14,12 +14,19 @@ const designPackages = [
     description: "Perfect for those who need a quick single landing page designed.",
     features: [
       "Designed with Figma",
-      "Discord/Slack/Email Coms",
+      "Discord/Slack/Email Communication",
       "Finished in under 2 weeks",
-      "Interactions & Animations"
+      "Interactions & Animations",
+      "Responsive design (mobile, tablet, desktop)",
+      "Custom illustrations/graphics",
+      "SEO-friendly layout",
+      "User experience optimization",
+      "Unlimited revisions",
+      "Detailed style guide"
     ],
     addons: [
-      { name: "Webflow Development", price: "+$799" }
+      { name: "Webflow Development", price: "+$799" },
+      { name: "Additional page", price: "+$199" }
     ]
   },
   {
@@ -29,12 +36,20 @@ const designPackages = [
     features: [
       "Up to 5 pages",
       "Designed with Figma",
-      "Discord/Slack/Email Coms",
+      "Discord/Slack/Email Communication",
       "Responsive design",
-      "Interactive prototypes"
+      "Interactive prototypes",
+      "Custom UI components",
+      "Animation specifications",
+      "Brand guidelines integration",
+      "Information architecture",
+      "Content strategy consultation",
+      "User flow optimization",
+      "Accessibility considerations"
     ],
     addons: [
-      { name: "Development", price: "+$1,599" }
+      { name: "Development", price: "+$1,599" },
+      { name: "Additional 5 pages", price: "+$599" }
     ]
   },
   {
@@ -46,10 +61,87 @@ const designPackages = [
       "Wireframing",
       "UI/UX design",
       "User testing",
-      "Design system creation"
+      "Design system creation",
+      "Competitive analysis",
+      "Journey mapping",
+      "Usability testing",
+      "Interaction design",
+      "Visual design language",
+      "Icon and illustration system",
+      "Developer handoff documentation"
     ],
     addons: [
-      { name: "Ongoing support", price: "+$499/month" }
+      { name: "Ongoing support", price: "+$499/month" },
+      { name: "Feature addition design", price: "+$799" }
+    ]
+  },
+  {
+    title: "App Design",
+    price: "$2,499+",
+    description: "Native-feeling mobile application design for iOS and Android platforms.",
+    features: [
+      "UI/UX design for mobile",
+      "Platform-specific guidelines",
+      "Interaction design",
+      "Gesture-based navigation",
+      "Onboarding flow",
+      "Design system for scaling",
+      "Dark/Light mode versions",
+      "Animation specifications",
+      "Prototype for user testing",
+      "Icon and asset creation",
+      "Accessibility compliance",
+      "Developer handoff"
+    ],
+    addons: [
+      { name: "Development", price: "+$5,999" },
+      { name: "Backend system design", price: "+$1,499" }
+    ]
+  },
+  {
+    title: "Brand Identity",
+    price: "$1,799+",
+    description: "Comprehensive brand identity package for emerging and established businesses.",
+    features: [
+      "Logo design (multiple concepts)",
+      "Color palette development",
+      "Typography selection",
+      "Brand guidelines document",
+      "Business card design",
+      "Letterhead & stationery",
+      "Social media templates",
+      "Email signature design",
+      "Brand voice consultation",
+      "Visual asset library",
+      "Competitor analysis",
+      "Brand positioning strategy"
+    ],
+    addons: [
+      { name: "Packaging design", price: "+$899" },
+      { name: "Marketing materials", price: "+$699" }
+    ]
+  },
+  {
+    title: "Pitch Deck",
+    price: "$1,299+",
+    description: "Professional presentation design to help secure investment and partnerships.",
+    features: [
+      "20-30 slides",
+      "Custom template creation",
+      "Data visualization",
+      "Infographic design",
+      "Message refinement",
+      "Narrative structure",
+      "Investor-focused content",
+      "Professional formatting",
+      "Icon and illustration system",
+      "Animation and transitions",
+      "Speaker notes",
+      "Handouts version"
+    ],
+    addons: [
+      { name: "Presentation coaching", price: "+$499" },
+      { name: "Additional 10 slides", price: "+$299" }
     ]
   }
 ];
@@ -162,7 +254,7 @@ const Design = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {designPackages.map((pkg, index) => (
             <DesignPackageCard
               key={index}
