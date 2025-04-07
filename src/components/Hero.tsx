@@ -100,8 +100,8 @@ const Hero = () => {
             className="mt-2.5 flex flex-col sm:flex-row gap-4 mb-3 pb-[40px]"
           >
             <InteractiveHoverButton 
-              text="Let's talk"
-              href="https://cal.com/shaheerahmar/15min"
+              text="Services"
+              href="#services"
               className="w-40 p-2.5 border-white/20 text-white"
             />
             <InteractiveHoverButton 

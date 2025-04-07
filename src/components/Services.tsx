@@ -38,7 +38,7 @@ const ServiceCard = ({
   return (
     <Card className={`w-full overflow-hidden border-white/10 ${isDark ? 'bg-white/10' : 'bg-white/5'} backdrop-blur-sm`}>
       <CardContent className="p-4">
-        <div className="mb-4 space-y-2">
+        <div className="space-y-2">
           <h3 className="text-2xl font-semibold text-white">
             <DecryptedText text={title} animateOn="view" speed={50} sequential={true} />
           </h3>
