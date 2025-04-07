@@ -17,16 +17,7 @@ const disciplines = [{
   id: 4,
   name: "back-end systems",
   description: "Architecting robust server-side solutions and API integrations"
-}
-//                      {
-//   id: 5,
-//   name: "product strategy",
-//   description: "Defining product vision and roadmap to achieve business objectives"
-// }, {
-//   id: 6,
-//   name: "design systems",
-//   description: "Establishing scalable design languages and component libraries"
-// }];
+}];
 
 const Disciplines = () => {
   return (
