@@ -18,7 +18,7 @@ const ventures: Venture[] = [{
   id: 2,
   name: "mujtama.app",
   description: "Acheive your goals and earn",
-  url: "https://mujtama.netlify.app"
+  url: "https://mujtama.framer.website/"
 }, {
   id: 3,
   name: "supersi.de",
