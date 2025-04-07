@@ -7,9 +7,7 @@ import { Link } from "react-router-dom";
 import { InteractiveHoverButton } from "./ui/interactive-hover-button";
 
 const designServices = [
-  "Landing Page",
-  "Full Website",
-  "Figma, Framer",
+  "Website, Landing",
   "Product Design",
   "App Design",
   "Brand Identity",
@@ -39,8 +37,8 @@ const ServiceCard = ({
 }) => {
   return (
     <Card className={`w-full overflow-hidden border-white/10 ${isDark ? 'bg-white/10' : 'bg-white/5'} backdrop-blur-sm`}>
-      <CardContent className="p-6">
-        <div className="mb-6 space-y-3">
+      <CardContent className="p-4">
+        <div className="mb-4 space-y-2">
           <h3 className="text-2xl font-semibold text-white">
             <DecryptedText text={title} animateOn="view" speed={50} sequential={true} />
           </h3>
@@ -99,19 +97,19 @@ const Services = () => {
         
         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
           <ServiceCard 
-            title="Design" 
+            title="" 
             services={designServices} 
             isDark={false} 
-            price="$799"
-            description="Perfect for those who need a quick single landing page designed."
+            price="Design"
+            description= "Complete design to enhance user experience, boost conversions, and align with your brand goals."
             pageUrl="/design"
           />
           <ServiceCard 
-            title="Development" 
+            title="" 
             services={developmentServices} 
             isDark={true}
-            price="Custom Flat"
-            description="Great if you want a larger site, web app, mobile or anything else."
+            price="Development"
+            description="Production-ready design & development."
             pageUrl="/development"
           />
         </div>
