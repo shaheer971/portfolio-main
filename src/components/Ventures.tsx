@@ -2,7 +2,7 @@
 import { Badge } from "@/components/ui/badge";
 import DecryptedText from "./DecryptedText";
 
-type VentureStatus = 'active' | 'in-progress' | 'not-started';
+type VentureStatus = 'active' | 'building' | 'up next' | 'not-started';
 
 type Venture = {
   id: number;
@@ -18,21 +18,21 @@ const ventures: Venture[] = [
     name: "onliversity.com",
     description: "The new way to learn",
     url: "https://onliversity.com",
-    status: "in-progress"
+    status: "building"
   },
   {
     id: 2,
     name: "mujtama.app",
     description: "Achieve your goals and earn",
     url: "https://mujtama.framer.website/",
-    status: "in-progress"
+    status: "building"
   },
   {
     id: 3,
     name: "waitlister.co",
     description: "Create beautiful waitlist pages",
     url: "#",
-    status: "not-started"
+    status: "up next"
   },
   {
     id: 4,
@@ -75,8 +75,10 @@ const getStatusColor = (status: VentureStatus) => {
   switch (status) {
     case 'active':
       return 'bg-green-500/20 text-green-400 hover:bg-green-500/30';
-    case 'in-progress':
+    case 'building':
       return 'bg-amber-500/20 text-amber-400 hover:bg-amber-500/30';
+    case 'up next':
+      return 'bg-blue-500/20 text-blue-400 hover:bg-blue-500/30';
     case 'not-started':
       return 'bg-slate-500/20 text-slate-400 hover:bg-slate-500/30';
     default:

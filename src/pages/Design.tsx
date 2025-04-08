@@ -283,7 +283,7 @@ const Design = () => {
           <a href="https://cal.com/shaheerahmar/15min" className="inline-block" target="_blank" rel="noopener noreferrer">
             <InteractiveHoverButton 
               text="Schedule a Call" 
-              className="border-white/20 text-white"
+              className="border-white/20 text-white w-40"
             />
           </a>
         </div>

@@ -1,4 +1,3 @@
-
 import { Plus } from "lucide-react";
 import DecryptedText from "./DecryptedText";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
@@ -43,9 +42,6 @@ const ServiceCard = ({
     <Card className={`w-full overflow-hidden border-white/10 ${isDark ? 'bg-white/10' : 'bg-white/5'} backdrop-blur-sm`}>
       <CardContent className="p-4">
         <div className="space-y-2">
-          <h3 className="text-2xl font-semibold text-white">
-            <DecryptedText text={title} animateOn="view" speed={50} sequential={true} />
-          </h3>
           <div className="text-3xl font-bold text-white">
             <DecryptedText text={price} animateOn="view" speed={30} sequential={true} />
           </div>
