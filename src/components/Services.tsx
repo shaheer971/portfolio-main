@@ -1,8 +1,7 @@
 
-import { Plus, ArrowRight } from "lucide-react";
+import { Plus } from "lucide-react";
 import DecryptedText from "./DecryptedText";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import { InteractiveHoverButton } from "./ui/interactive-hover-button";
 
@@ -35,6 +34,11 @@ const ServiceCard = ({
   description: string;
   pageUrl: string;
 }) => {
+  // Handle navigation to other pages with scroll to top
+  const handleNavigate = () => {
+    window.scrollTo(0, 0);
+  };
+
   return (
     <Card className={`w-full overflow-hidden border-white/10 ${isDark ? 'bg-white/10' : 'bg-white/5'} backdrop-blur-sm`}>
       <CardContent className="p-4">
@@ -64,7 +68,7 @@ const ServiceCard = ({
         </div>
       </CardContent>
       <CardFooter className="p-6 pt-0">
-        <Link to={pageUrl} className="w-full">
+        <Link to={pageUrl} className="w-full" onClick={handleNavigate}>
           <InteractiveHoverButton 
             text="Get Started" 
             className="w-full border-white/20 text-white"

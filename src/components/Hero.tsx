@@ -4,6 +4,15 @@ import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button
 import SplitText from "./SplitText";
 
 const Hero = () => {
+  // Handle smooth scrolling to the services section
+  const scrollToServices = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const servicesSection = document.getElementById('services');
+    if (servicesSection) {
+      servicesSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section className="min-h-[50vh] pt-16 pb-1 relative overflow-hidden mx-0 px-0 my-0 py-[60px]">
       <div className="absolute inset-0 pointer-events-none">
@@ -101,7 +110,7 @@ const Hero = () => {
           >
             <InteractiveHoverButton 
               text="Services"
-              href="#services"
+              onClick={scrollToServices}
               className="w-40 p-2.5 border-white/20 text-white"
             />
             <InteractiveHoverButton 
