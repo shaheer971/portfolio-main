@@ -18,7 +18,7 @@ const Navbar = () => {
   }, []);
 
   const socialIcons = [
-    { Icon: Twitter, href: "https://x.com/shaheer972", label: "Twitter" },
+    { Icon: Twitter, href: "https://x.com/_shaheerdev", label: "Twitter" },
     { Icon: Palette, href: "https://www.behance.net/shaheerahmar", label: "Behance" },
     { Icon: Linkedin, href: "https://contra.com/shaheer_ahmar_dyxao8hk", label: "Contra" }
   ];

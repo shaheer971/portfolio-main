@@ -90,7 +90,7 @@ const Hero = () => {
             }} 
             className="mt-1.5 text-lg md:text-xl text-white/80 max-w-2xl leading-relaxed my-0"
           >
-            I help transform complex ideas into elegant digital experiences — crafting products that combine functionality with visual excellence.
+            I help transform complex ideas into elegant digital experiences - crafting products that combine functionality with visual excellence.
           </motion.p>
           
           <motion.div 
@@ -114,7 +114,7 @@ const Hero = () => {
               className="w-40 p-2.5 border-white/20 text-white"
             />
             <InteractiveHoverButton 
-              text="View work"
+              text="All work"
               href="https://www.behance.net/shaheerahmar"
               className="w-40 p-2.5 border-white/20 text-white"
             />
