@@ -14,6 +14,13 @@ type Venture = {
 
 const ventures: Venture[] = [
   {
+    id: 0,
+    name: "kfupm.market",
+    description: "kfupm community marketplace",
+    url: "https://kfupm.market",
+    status: "active"
+  },
+  {
     id: 1,
     name: "onliversity.com",
     description: "The new way to learn",
