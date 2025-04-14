@@ -17,7 +17,7 @@ const ventures: Venture[] = [
     id: 0,
     name: "kfupm.market",
     description: "kfupm community marketplace",
-    url: "https://kfupm.market",
+    url: "https://kfupmmarket.netlify.app",
     status: "active"
   },
   {
