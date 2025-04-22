@@ -2,13 +2,18 @@
 import React, { forwardRef } from "react";
 import { cn } from "@/lib/utils";
 
-interface NavOutlineButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+type ButtonOrAnchorProps = {
   as?: "a" | "button";
   href?: string;
   children: React.ReactNode;
   className?: string;
   disableHover?: boolean;
 }
+
+type NavOutlineButtonProps = ButtonOrAnchorProps & (
+  | React.ButtonHTMLAttributes<HTMLButtonElement>
+  | React.AnchorHTMLAttributes<HTMLAnchorElement>
+);
 
 export const NavOutlineButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, NavOutlineButtonProps>(
   ({ as = "button", href, children, className, disableHover = false, ...rest }, ref) => {
@@ -37,7 +42,7 @@ export const NavOutlineButton = forwardRef<HTMLButtonElement | HTMLAnchorElement
         className={cn(style, hover, className)}
         type="button"
         ref={ref as React.Ref<HTMLButtonElement>}
-        {...rest}
+        {...(rest as React.ButtonHTMLAttributes<HTMLButtonElement>)}
       >
         {children}
       </button>

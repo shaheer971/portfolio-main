@@ -1,5 +1,5 @@
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -35,7 +35,6 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const isMobile = useIsMobile();
   const [socialOpen, setSocialOpen] = useState(false);
-  const socialBtnRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
