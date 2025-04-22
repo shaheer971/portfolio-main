@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Twitter, Linkedin } from "lucide-react";
+import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 
 const BEHANCE_LINK = "https://www.behance.net/shaheerahmar";
 const SERVICES_SECTION_ID = "services";
@@ -28,14 +29,13 @@ function scrollToSection(id: string) {
   }
 }
 
-// Outlined button style, shared
+// Updated button style with reduced padding and size
 const navBtn =
-  "px-4 py-2 rounded-lg border border-white/20 bg-transparent text-white font-medium hover:bg-white/5 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-white/20 focus:ring-offset-2 text-sm";
+  "px-3 py-1.5 rounded-lg border border-white/20 bg-transparent text-white font-medium hover:bg-white/5 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-white/20 focus:ring-offset-2 text-sm";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const isMobile = useIsMobile();
-  // Control the socials popover manually on mobile for "open above" behavior
   const [socialOpen, setSocialOpen] = useState(false);
   const socialsBtnRef = useRef<HTMLButtonElement | null>(null);
 
@@ -57,7 +57,7 @@ const Navbar = () => {
         )}
       >
         <div className="max-w-screen-xl mx-auto px-4 py-3 flex items-center justify-center">
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             {/* Work Button */}
             <a
               href={BEHANCE_LINK}
@@ -103,6 +103,12 @@ const Navbar = () => {
                 </div>
               </PopoverContent>
             </Popover>
+            {/* Let's Talk Button */}
+            <InteractiveHoverButton 
+              text="Let's talk" 
+              href={CAL_LINK}
+              className={`${navBtn} w-32`}
+            />
           </div>
         </div>
       </header>
@@ -121,8 +127,8 @@ const Navbar = () => {
         "rounded-full py-3 px-6"
       )}
     >
-      <div className="flex items-center justify-between gap-4 w-full">
-        <div className="flex-1 flex items-center justify-center gap-4">
+      <div className="flex items-center justify-between gap-3 w-full">
+        <div className="flex-1 flex items-center justify-center gap-3">
           {/* Work */}
           <a
             href={BEHANCE_LINK}
@@ -176,6 +182,12 @@ const Navbar = () => {
               </div>
             </PopoverContent>
           </Popover>
+          {/* Let's Talk Button */}
+          <InteractiveHoverButton 
+            text="Let's talk" 
+            href={CAL_LINK}
+            className={`${navBtn} w-32`}
+          />
         </div>
       </div>
     </header>
