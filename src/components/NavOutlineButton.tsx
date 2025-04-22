@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { forwardRef } from "react";
 import { cn } from "@/lib/utils";
 
 interface NavOutlineButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -10,41 +10,39 @@ interface NavOutlineButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEle
   disableHover?: boolean;
 }
 
-export function NavOutlineButton({
-  as = "button",
-  href,
-  children,
-  className,
-  disableHover = false,
-  ...rest
-}: NavOutlineButtonProps) {
-  const style =
-    "px-2.5 py-1.5 rounded-lg border border-white/20 bg-transparent text-white font-medium text-sm transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-white/20 focus:ring-offset-2";
-  const hover =
-    disableHover
-      ? ""
-      : "hover:bg-white/5";
+export const NavOutlineButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, NavOutlineButtonProps>(
+  ({ as = "button", href, children, className, disableHover = false, ...rest }, ref) => {
+    const style =
+      "px-2 py-1 rounded-lg border border-white/20 bg-transparent text-white font-medium text-sm transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-white/20 focus:ring-offset-2";
+    const hover =
+      disableHover
+        ? ""
+        : "hover:bg-white/5";
 
-  if (as === "a" && href) {
+    if (as === "a" && href) {
+      return (
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={cn(style, hover, className)}
+          {...(rest as React.AnchorHTMLAttributes<HTMLAnchorElement>)}
+        >
+          {children}
+        </a>
+      );
+    }
     return (
-      <a
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
+      <button
         className={cn(style, hover, className)}
+        type="button"
+        ref={ref as React.Ref<HTMLButtonElement>}
         {...rest}
       >
         {children}
-      </a>
+      </button>
     );
   }
-  return (
-    <button
-      className={cn(style, hover, className)}
-      type="button"
-      {...rest}
-    >
-      {children}
-    </button>
-  );
-}
+);
+
+NavOutlineButton.displayName = "NavOutlineButton";

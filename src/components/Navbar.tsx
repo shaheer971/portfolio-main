@@ -55,7 +55,7 @@ const Navbar = () => {
         )}
       >
         <div className="max-w-screen-xl mx-auto px-4 py-3 flex items-center justify-center">
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-2">
             <NavOutlineButton as="a" href={BEHANCE_LINK}>
               Work
             </NavOutlineButton>
@@ -69,7 +69,6 @@ const Navbar = () => {
                   onClick={() => setSocialOpen((open) => !open)}
                   aria-haspopup="true"
                   aria-expanded={socialOpen}
-                  ref={socialBtnRef}
                   style={{ position: "relative", zIndex: 10 }}
                 >
                   Socials
@@ -120,8 +119,8 @@ const Navbar = () => {
       )}
       style={{maxWidth: 420, minWidth: 240}}
     >
-      <div className="flex items-center justify-between gap-2 w-full">
-        <div className="flex-1 flex items-center justify-center gap-2">
+      <div className="flex items-center justify-between gap-1.5 w-full">
+        <div className="flex-1 flex items-center justify-center gap-1.5">
           <NavOutlineButton as="a" href={BEHANCE_LINK}>
             Work
           </NavOutlineButton>
@@ -134,7 +133,6 @@ const Navbar = () => {
                 onClick={() => setSocialOpen((open) => !open)}
                 aria-haspopup="true"
                 aria-expanded={socialOpen}
-                ref={socialBtnRef}
               >
                 Socials
               </NavOutlineButton>
