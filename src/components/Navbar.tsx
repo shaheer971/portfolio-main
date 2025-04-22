@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Twitter, Linkedin } from "lucide-react";
-import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
+import { NavOutlineButton } from "@/components/NavOutlineButton";
 
 const BEHANCE_LINK = "https://www.behance.net/shaheerahmar";
 const SERVICES_SECTION_ID = "services";
@@ -29,15 +29,13 @@ function scrollToSection(id: string) {
   }
 }
 
-// Updated button style with reduced padding and size
-const navBtn =
-  "px-3 py-1.5 rounded-lg border border-white/20 bg-transparent text-white font-medium hover:bg-white/5 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-white/20 focus:ring-offset-2 text-sm";
+const btnRadius = "rounded-lg"; // Desktop and button border radius
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const isMobile = useIsMobile();
   const [socialOpen, setSocialOpen] = useState(false);
-  const socialsBtnRef = useRef<HTMLButtonElement | null>(null);
+  const socialBtnRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -57,30 +55,25 @@ const Navbar = () => {
         )}
       >
         <div className="max-w-screen-xl mx-auto px-4 py-3 flex items-center justify-center">
-          <div className="flex items-center gap-3">
-            {/* Work Button */}
-            <a
-              href={BEHANCE_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={navBtn}
-            >
+          <div className="flex items-center gap-2.5">
+            <NavOutlineButton as="a" href={BEHANCE_LINK}>
               Work
-            </a>
-            {/* Services Button */}
-            <button
-              className={navBtn}
-              onClick={() => scrollToSection(SERVICES_SECTION_ID)}
-              type="button"
-            >
+            </NavOutlineButton>
+            <NavOutlineButton onClick={() => scrollToSection(SERVICES_SECTION_ID)}>
               Services
-            </button>
+            </NavOutlineButton>
             {/* Socials Button with Popover */}
-            <Popover>
+            <Popover open={socialOpen} onOpenChange={setSocialOpen}>
               <PopoverTrigger asChild>
-                <button className={navBtn} type="button">
+                <NavOutlineButton
+                  onClick={() => setSocialOpen((open) => !open)}
+                  aria-haspopup="true"
+                  aria-expanded={socialOpen}
+                  ref={socialBtnRef}
+                  style={{ position: "relative", zIndex: 10 }}
+                >
                   Socials
-                </button>
+                </NavOutlineButton>
               </PopoverTrigger>
               <PopoverContent
                 align="center"
@@ -103,12 +96,9 @@ const Navbar = () => {
                 </div>
               </PopoverContent>
             </Popover>
-            {/* Let's Talk Button */}
-            <InteractiveHoverButton 
-              text="Let's talk" 
-              href={CAL_LINK}
-              className={`${navBtn} w-32`}
-            />
+            <NavOutlineButton as="a" href={CAL_LINK} disableHover>
+              Let's talk
+            </NavOutlineButton>
           </div>
         </div>
       </header>
@@ -120,51 +110,41 @@ const Navbar = () => {
     <header
       className={cn(
         "fixed z-50 transition-all duration-300 left-1/2 -translate-x-1/2",
-        "bottom-6 w-[80%]",
+        "bottom-4 w-[96vw] px-1", // px-1 for edge breathing
         isScrolled
           ? "bg-background/80 backdrop-blur-md border border-white/10"
           : "bg-background/50 backdrop-blur-sm border border-white/5",
-        "rounded-full py-3 px-6"
+        "py-2",
+        "flex items-center justify-center",
+        "rounded-lg" // Less rounded, match buttons exactly
       )}
+      style={{maxWidth: 420, minWidth: 240}}
     >
-      <div className="flex items-center justify-between gap-3 w-full">
-        <div className="flex-1 flex items-center justify-center gap-3">
-          {/* Work */}
-          <a
-            href={BEHANCE_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={navBtn}
-          >
+      <div className="flex items-center justify-between gap-2 w-full">
+        <div className="flex-1 flex items-center justify-center gap-2">
+          <NavOutlineButton as="a" href={BEHANCE_LINK}>
             Work
-          </a>
-          {/* Services */}
-          <button
-            className={navBtn}
-            onClick={() => scrollToSection(SERVICES_SECTION_ID)}
-            type="button"
-            ref={socialsBtnRef}
-          >
+          </NavOutlineButton>
+          <NavOutlineButton onClick={() => scrollToSection(SERVICES_SECTION_ID)}>
             Services
-          </button>
-          {/* Socials Button w/ popover above the "Services" button */}
+          </NavOutlineButton>
           <Popover open={socialOpen} onOpenChange={setSocialOpen}>
             <PopoverTrigger asChild>
-              <button
-                className={navBtn}
-                type="button"
+              <NavOutlineButton
                 onClick={() => setSocialOpen((open) => !open)}
                 aria-haspopup="true"
                 aria-expanded={socialOpen}
+                ref={socialBtnRef}
               >
                 Socials
-              </button>
+              </NavOutlineButton>
             </PopoverTrigger>
             <PopoverContent
               align="center"
               side="top"
               className="w-36 p-0 mb-2 border border-white/15 rounded-lg shadow-lg bg-background"
               sideOffset={8}
+              style={{minWidth: "120px"}}
             >
               <div className="flex flex-col py-2 gap-1">
                 {SOCIAL_LINKS.map(({ name, href, Icon }) => (
@@ -182,12 +162,9 @@ const Navbar = () => {
               </div>
             </PopoverContent>
           </Popover>
-          {/* Let's Talk Button */}
-          <InteractiveHoverButton 
-            text="Let's talk" 
-            href={CAL_LINK}
-            className={`${navBtn} w-32`}
-          />
+          <NavOutlineButton as="a" href={CAL_LINK} disableHover>
+            Let's talk
+          </NavOutlineButton>
         </div>
       </div>
     </header>
