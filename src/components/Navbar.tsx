@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -108,17 +107,18 @@ const Navbar = () => {
     <header
       className={cn(
         "fixed z-50 transition-all duration-300 left-1/2 -translate-x-1/2",
-        "bottom-4 w-[96vw] px-1", // px-1 for edge breathing
+        "bottom-4 px-1", // px-1 for edge breathing
         isScrolled
           ? "bg-background/80 backdrop-blur-md border border-white/10"
           : "bg-background/50 backdrop-blur-sm border border-white/5",
         "py-2",
         "flex items-center justify-center",
-        "rounded-lg" // Less rounded, match buttons exactly
+        "rounded-lg", // Less rounded corners
+        "w-fit" // Changed from w-[96vw] to w-fit
       )}
       style={{maxWidth: 420, minWidth: 240}}
     >
-      <div className="flex items-center justify-between gap-1.5 w-full">
+      <div className="flex items-center justify-center gap-1 w-full px-2">
         <div className="flex-1 flex items-center justify-center gap-1.5">
           <NavOutlineButton as="a" href={BEHANCE_LINK}>
             Work

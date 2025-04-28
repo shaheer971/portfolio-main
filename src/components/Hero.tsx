@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 import SplitText from "./SplitText";
+
 const Hero = () => {
-  // Only one CTA: Let's talk
   return <section className="min-h-[50vh] pt-16 pb-1 relative overflow-hidden mx-0 px-0 my-0 py-[60px]">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-0 w-px h-full bg-gradient-to-b from-transparent via-white/10 to-transparent opacity-30" />
@@ -10,7 +10,6 @@ const Hero = () => {
       </div>
       <div className="content-container relative">
         <div className="flex flex-col items-start max-w-3xl mx-0 py-0">
-          {/* Profile Picture with hover effect */}
           <motion.div initial={{
           opacity: 0,
           scale: 0.8
@@ -30,7 +29,6 @@ const Hero = () => {
               <img src="/pfp.jpeg" alt="Profile" className="w-full h-full object-cover" />
             </div>
           </motion.div>
-          {/* Hero Text with SplitText */}
           <div className="md:text-6xl leading-tight md:leading-tight tracking-tight lg:text-2xl text-2xl font-semibold py-[7px] md:pt-[20px]">
             <div className="block font-extrabold text-white">
               <SplitText text="Hey, I'm Shaheer," delay={150} textAlign="left" threshold={0.2} animationFrom={{
@@ -71,10 +69,15 @@ const Hero = () => {
           duration: 0.6,
           delay: 0.8
         }} className="mt-4 flex gap-4 mb-3 pb-[40px]">
-            <InteractiveHoverButton text="Let's talk" href="https://cal.com/shaheerahmar/15min" className="w-40 p-2.5 border-white/20 text-white" />
+            <InteractiveHoverButton 
+              text="Let's talk" 
+              href={`https://wa.me/966553533795`} 
+              className="w-40 p-2.5 border-white/20 text-white" 
+            />
           </motion.div>
         </div>
       </div>
     </section>;
 };
+
 export default Hero;
