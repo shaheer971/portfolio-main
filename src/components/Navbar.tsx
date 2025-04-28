@@ -60,7 +60,6 @@ const Navbar = () => {
             <NavOutlineButton onClick={() => scrollToSection(SERVICES_SECTION_ID)}>
               Services
             </NavOutlineButton>
-            {/* Socials Button with Popover */}
             <Popover open={socialOpen} onOpenChange={setSocialOpen}>
               <PopoverTrigger asChild>
                 <NavOutlineButton
@@ -93,7 +92,7 @@ const Navbar = () => {
                 </div>
               </PopoverContent>
             </Popover>
-            <NavOutlineButton as="a" href={CAL_LINK} disableHover>
+            <NavOutlineButton as="a" href="https://wa.me/966553533795" disableHover>
               Let's talk
             </NavOutlineButton>
           </div>
@@ -102,67 +101,65 @@ const Navbar = () => {
     );
   }
 
-  // MOBILE NAVBAR (bottom bar)
+  // MOBILE NAVBAR
   return (
     <header
       className={cn(
         "fixed z-50 transition-all duration-300 left-1/2 -translate-x-1/2",
-        "bottom-4 px-1", // px-1 for edge breathing
+        "bottom-4",
         isScrolled
           ? "bg-background/80 backdrop-blur-md border border-white/10"
           : "bg-background/50 backdrop-blur-sm border border-white/5",
-        "py-2",
+        "py-2 px-3",
         "flex items-center justify-center",
-        "rounded-lg", // Less rounded corners
-        "w-fit" // Changed from w-[96vw] to w-fit
+        "rounded-lg",
+        "w-fit"
       )}
-      style={{maxWidth: 420, minWidth: 240}}
+      style={{maxWidth: 420}}
     >
-      <div className="flex items-center justify-center gap-1 w-full px-2">
-        <div className="flex-1 flex items-center justify-center gap-1.5">
-          <NavOutlineButton as="a" href={BEHANCE_LINK}>
-            Work
-          </NavOutlineButton>
-          <NavOutlineButton onClick={() => scrollToSection(SERVICES_SECTION_ID)}>
-            Services
-          </NavOutlineButton>
-          <Popover open={socialOpen} onOpenChange={setSocialOpen}>
-            <PopoverTrigger asChild>
-              <NavOutlineButton
-                onClick={() => setSocialOpen((open) => !open)}
-                aria-haspopup="true"
-                aria-expanded={socialOpen}
-              >
-                Socials
-              </NavOutlineButton>
-            </PopoverTrigger>
-            <PopoverContent
-              align="center"
-              side="top"
-              className="w-36 p-0 mb-2 border border-white/15 rounded-lg shadow-lg bg-background"
-              sideOffset={8}
-              style={{minWidth: "120px"}}
+      <div className="flex items-center justify-center gap-2">
+        <NavOutlineButton as="a" href={BEHANCE_LINK}>
+          Work
+        </NavOutlineButton>
+        <NavOutlineButton onClick={() => scrollToSection(SERVICES_SECTION_ID)}>
+          Services
+        </NavOutlineButton>
+        <Popover open={socialOpen} onOpenChange={setSocialOpen}>
+          <PopoverTrigger asChild>
+            <NavOutlineButton
+              onClick={() => setSocialOpen((open) => !open)}
+              aria-haspopup="true"
+              aria-expanded={socialOpen}
             >
-              <div className="flex flex-col py-2 gap-1">
-                {SOCIAL_LINKS.map(({ name, href, Icon }) => (
-                  <a
-                    key={name}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full flex items-center gap-2 px-4 py-2 hover:bg-white/5 rounded transition"
-                  >
-                    <Icon className="w-4 h-4" />
-                    <span className="text-sm">{name}</span>
-                  </a>
-                ))}
-              </div>
-            </PopoverContent>
-          </Popover>
-          <NavOutlineButton as="a" href={CAL_LINK} disableHover>
-            Let's talk
-          </NavOutlineButton>
-        </div>
+              Socials
+            </NavOutlineButton>
+          </PopoverTrigger>
+          <PopoverContent
+            align="center"
+            side="top"
+            className="w-36 p-0 mb-2 border border-white/15 rounded-lg shadow-lg bg-background"
+            sideOffset={8}
+            style={{minWidth: "120px"}}
+          >
+            <div className="flex flex-col py-2 gap-1">
+              {SOCIAL_LINKS.map(({ name, href, Icon }) => (
+                <a
+                  key={name}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full flex items-center gap-2 px-4 py-2 hover:bg-white/5 rounded transition"
+                >
+                  <Icon className="w-4 h-4" />
+                  <span className="text-sm">{name}</span>
+                </a>
+              ))}
+            </div>
+          </PopoverContent>
+        </Popover>
+        <NavOutlineButton as="a" href="https://wa.me/966553533795" disableHover>
+          Let's&nbsp;talk
+        </NavOutlineButton>
       </div>
     </header>
   );
