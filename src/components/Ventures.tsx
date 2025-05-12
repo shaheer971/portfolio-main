@@ -40,42 +40,42 @@ const ventures: Venture[] = [
     description: "Create beautiful waitlist pages",
     url: "#",
     status: "up next"
-  },
-  {
-    id: 4,
-    name: "resumly.io",
-    description: "Instantly create resume portfolio",
-    url: "#",
-    status: "not-started"
-  },
-  {
-    id: 5,
-    name: "askify.ai",
-    description: "Chat with any website",
-    url: "https://askifyapp.netlify.app",
-    status: "not-started"
-  },
-  {
-    id: 6,
-    name: "supersi.de",
-    description: "Browser productivity Sidebar",
-    url: "https://superside.netlify.app",
-    status: "not-started"
-  },
-  {
-    id: 7,
-    name: "tazkiyah.app",
-    description: "Simplify habit building",
-    url: "https://tazkiyah.netlify.app",
-    status: "not-started"
-  },
-  {
-    id: 8,
-    name: "tahseen.health",
-    description: "Simplify health tracking",
-    url: "https://tahseen.health",
-    status: "not-started"
   }
+  // {
+  //   id: 4,
+  //   name: "resumly.io",
+  //   description: "Instantly create resume portfolio",
+  //   url: "#",
+  //   status: "not-started"
+  // },
+  // {
+  //   id: 5,
+  //   name: "askify.ai",
+  //   description: "Chat with any website",
+  //   url: "https://askifyapp.netlify.app",
+  //   status: "not-started"
+  // },
+  // {
+  //   id: 6,
+  //   name: "supersi.de",
+  //   description: "Browser productivity Sidebar",
+  //   url: "https://superside.netlify.app",
+  //   status: "not-started"
+  // },
+  // {
+  //   id: 7,
+  //   name: "tazkiyah.app",
+  //   description: "Simplify habit building",
+  //   url: "https://tazkiyah.netlify.app",
+  //   status: "not-started"
+  // },
+  // {
+  //   id: 8,
+  //   name: "tahseen.health",
+  //   description: "Simplify health tracking",
+  //   url: "https://tahseen.health",
+  //   status: "not-started"
+  // }
 ];
 
 const getStatusColor = (status: VentureStatus) => {
