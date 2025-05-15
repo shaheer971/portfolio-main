@@ -5,6 +5,9 @@ import DecryptedText from "./DecryptedText";
 import { AspectRatio } from "./ui/aspect-ratio";
 import { Skeleton } from "./ui/skeleton";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { Card, CardFooter } from "./ui/card";
+import { Button } from "./ui/button";
+
 type Project = {
   id: string;
   title: string;
@@ -12,6 +15,7 @@ type Project = {
   image: string;
   link: string;
 };
+
 const OptimizedImage = ({
   src,
   alt,
@@ -23,11 +27,22 @@ const OptimizedImage = ({
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(false);
-  return <div className="relative w-full h-full">
+  
+  return (
+    <div className="relative w-full h-full">
       {!isLoaded && !error && <Skeleton className="absolute inset-0 w-full h-full bg-secondary" />}
-      <img src={src} alt={alt} loading="lazy" onLoad={() => setIsLoaded(true)} onError={() => setError(true)} className={`w-full h-full object-cover transition-all duration-700 group-hover:scale-105 ${isLoaded ? "opacity-100" : "opacity-0"}`} />
-    </div>;
+      <img 
+        src={src} 
+        alt={alt} 
+        loading="lazy" 
+        onLoad={() => setIsLoaded(true)} 
+        onError={() => setError(true)} 
+        className={`w-full h-full object-cover transition-all duration-700 group-hover:scale-105 ${isLoaded ? "opacity-100" : "opacity-0"}`} 
+      />
+    </div>
+  );
 };
+
 const Projects = () => {
   const [selectedCategory, setSelectedCategory] = useState("Featured");
   const [isVisible, setIsVisible] = useState(false);
@@ -178,9 +193,11 @@ const Projects = () => {
     }
   };
   const mobileContentPadding = isMobile ? 'px-1' : 'px-2';
-  return <section id="work" ref={sectionRef} className="relative my-0 py-[40px] slide-up overflow-hidden" style={{
-    animationDelay: '0.2s'
-  }}>
+  
+  return (
+    <section id="work" ref={sectionRef} className="relative my-0 py-[40px] slide-up overflow-hidden" style={{
+      animationDelay: '0.2s'
+    }}>
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-0 w-px h-full bg-gradient-to-b from-transparent via-white/10 to-transparent opacity-30" />
         <div className="absolute top-0 right-0 w-px h-full bg-gradient-to-b from-transparent via-white/10 to-transparent opacity-30" />
@@ -190,44 +207,67 @@ const Projects = () => {
         <div className={`transition-all duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
           <div className={`w-full mb-4 ${mobileContentPadding}`}>
             <div className={`w-full grid grid-cols-2 sm:grid-cols-3 md:flex md:items-center gap-2 p-1.5 overflow-x-auto scrollbar-hidden ${!isMobile ? 'rounded-full border border-white/10 bg-white/[0.02] backdrop-blur-xl' : ''}`}>
-              {categories.map(category => <button key={category} onClick={() => setSelectedCategory(category)} className={`w-full md:flex-1 px-4 md:px-6 py-2 text-sm font-medium rounded-full transition-all duration-300 whitespace-nowrap
-                    ${category === selectedCategory ? "bg-white/10 text-white shadow-[inset_0px_1px_0px_0px_rgba(255,255,255,0.1)]" : "text-white/60 hover:text-white hover:bg-white/5"}`}>
+              {categories.map(category => (
+                <button 
+                  key={category} 
+                  onClick={() => setSelectedCategory(category)} 
+                  className={`w-full md:flex-1 px-4 md:px-6 py-2 text-sm font-medium rounded-full transition-all duration-300 whitespace-nowrap
+                    ${category === selectedCategory ? "bg-white/10 text-white shadow-[inset_0px_1px_0px_0px_rgba(255,255,255,0.1)]" : "text-white/60 hover:text-white hover:bg-white/5"}`}
+                >
                   <DecryptedText text={category} animateOn="hover" speed={30} />
-                </button>)}
+                </button>
+              ))}
             </div>
           </div>
 
           <div className={mobileContentPadding}>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-              {filteredProjects.map((project, index) => <motion.div key={project.id} initial={{
-              opacity: 0,
-              y: 20
-            }} animate={{
-              opacity: 1,
-              y: 0
-            }} transition={{
-              duration: 0.5,
-              delay: index * 0.1
-            }} className="group py-0 px-0">
-                  <a href={project.link} target="_blank" rel="noopener noreferrer" className="block rounded-xl border border-white/10 p-3 space-y-4 bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-300 py-[7px] px-[8px]">
-                    <div className="relative rounded-lg overflow-hidden border border-white/10">
-                      <AspectRatio ratio={16 / 9} className="bg-secondary">
+              {filteredProjects.map((project, index) => (
+                <motion.div 
+                  key={project.id} 
+                  initial={{ opacity: 0, y: 20 }} 
+                  animate={{ opacity: 1, y: 0 }} 
+                  transition={{ duration: 0.5, delay: index * 0.1 }} 
+                  className="group py-0 px-0"
+                >
+                  <Card className="rounded-xl border border-white/10 overflow-hidden bg-white/[0.02]">
+                    <a 
+                      href={project.link} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="block"
+                    >
+                      <AspectRatio ratio={16 / 9} className="bg-secondary relative">
                         <OptimizedImage src={project.image} alt={project.title} />
                       </AspectRatio>
-                    </div>
-                    
-                    <div className="flex items-start justify-between py-0">
-                      <h3 className="text-left font-medium">
-                        <DecryptedText text={project.title} animateOn="hover" speed={30} sequential={true} />
-                      </h3>
-                      <ArrowUpRight className="w-4 h-4 text-white/40 group-hover:text-white transition-colors" />
-                    </div>
-                  </a>
-                </motion.div>)}
+                      
+                      <CardFooter className="justify-between before:bg-white/10 border-white/20 border-t overflow-hidden py-2 relative before:rounded-xl w-full z-10 px-3">
+                        <h3 className="text-left font-medium text-white">
+                          <DecryptedText 
+                            text={project.title} 
+                            animateOn="hover" 
+                            speed={30} 
+                            sequential={true} 
+                          />
+                        </h3>
+                        <Button 
+                          size="sm" 
+                          variant="ghost" 
+                          className="p-0 h-auto bg-transparent hover:bg-transparent"
+                        >
+                          <ArrowUpRight className="w-4 h-4 text-white/40 group-hover:text-white transition-colors" />
+                        </Button>
+                      </CardFooter>
+                    </a>
+                  </Card>
+                </motion.div>
+              ))}
             </div>
           </div>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default Projects;
