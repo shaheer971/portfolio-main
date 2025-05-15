@@ -230,7 +230,7 @@ const Projects = () => {
                   transition={{ duration: 0.5, delay: index * 0.1 }} 
                   className="group py-0 px-0"
                 >
-                  <Card className="rounded-xl border border-white/10 overflow-hidden bg-white/[0.02]">
+                  <Card className="rounded-xl border border-white/10 overflow-hidden bg-white/[0.02] relative">
                     <a 
                       href={project.link} 
                       target="_blank" 
@@ -241,7 +241,7 @@ const Projects = () => {
                         <OptimizedImage src={project.image} alt={project.title} />
                       </AspectRatio>
                       
-                      <CardFooter className="justify-between before:bg-white/10 border-white/20 border-t overflow-hidden py-2 relative before:rounded-xl w-full z-10 px-3">
+                      <CardFooter className="justify-between before:bg-white/10 border-white/20 border-t overflow-hidden py-2 absolute before:rounded-xl bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10 backdrop-blur-md bg-black/20">
                         <h3 className="text-left font-medium text-white">
                           <DecryptedText 
                             text={project.title} 
