@@ -1,12 +1,8 @@
+
 import { useRef, useState, useEffect, useMemo } from "react";
-import { ArrowUpRight } from "lucide-react";
-import { motion } from "framer-motion";
-import DecryptedText from "./DecryptedText";
-import { AspectRatio } from "./ui/aspect-ratio";
-import { Skeleton } from "./ui/skeleton";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { Card, CardFooter } from "./ui/card";
-import { Button } from "./ui/button";
+import ProjectFilters from "./ProjectFilters";
+import ProjectsList from "./ProjectsList";
 
 type Project = {
   id: string;
@@ -16,53 +12,30 @@ type Project = {
   link: string;
 };
 
-const OptimizedImage = ({
-  src,
-  alt,
-  className = ""
-}: {
-  src: string;
-  alt: string;
-  className?: string;
-}) => {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [error, setError] = useState(false);
-  
-  return (
-    <div className="relative w-full h-full">
-      {!isLoaded && !error && <Skeleton className="absolute inset-0 w-full h-full bg-secondary" />}
-      <img 
-        src={src} 
-        alt={alt} 
-        loading="lazy" 
-        onLoad={() => setIsLoaded(true)} 
-        onError={() => setError(true)} 
-        className={`w-full h-full object-cover transition-all duration-700 group-hover:scale-105 ${isLoaded ? "opacity-100" : "opacity-0"}`} 
-      />
-    </div>
-  );
-};
-
 const Projects = () => {
   const [selectedCategory, setSelectedCategory] = useState("Featured");
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   const isMobile = useIsMobile();
+  
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
       setIsVisible(entry.isIntersecting);
     }, {
       threshold: 0.1
     });
+    
     if (sectionRef.current) {
       observer.observe(sectionRef.current);
     }
+    
     return () => {
       if (sectionRef.current) {
         observer.unobserve(sectionRef.current);
       }
     };
   }, []);
+  
   const projects: Project[] = useMemo(() => [{
     id: "kfupm-lms",
     title: "Concept University LMS",
@@ -172,28 +145,9 @@ const Projects = () => {
     image: "/project images/twlm.png",
     link: "https://www.behance.net/gallery/200150477/App-poster-design-Twlm"
   }], []);
-  const categories = useMemo(() => ["Featured", "Web Design", "Product Design", "App Design", "Brand Identity", "Other"], []);
-  const filteredProjects = useMemo(() => {
-    if (selectedCategory === "Featured") {
-      return projects.filter(project => ["superside", "bolt1", "bolt2", "nextai", "askify", "kfupm-lms", "onliverse", "fayda-digital"].includes(project.id));
-    }
-    return projects.filter(project => project.tags.includes(selectedCategory));
-  }, [projects, selectedCategory]);
-  const fadeIn = {
-    initial: {
-      opacity: 0,
-      y: 20
-    },
-    animate: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6
-      }
-    }
-  };
-  const mobileContentPadding = isMobile ? 'px-1' : 'px-2';
   
+  const categories = useMemo(() => ["Featured", "Web Design", "Product Design", "App Design", "Brand Identity", "Other"], []);
+
   return (
     <section id="work" ref={sectionRef} className="relative my-0 py-[40px] slide-up overflow-hidden" style={{
       animationDelay: '0.2s'
@@ -205,65 +159,18 @@ const Projects = () => {
       
       <div className="container mx-auto max-w-full relative px-[8px]">
         <div className={`transition-all duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-          <div className={`w-full mb-4 ${mobileContentPadding}`}>
-            <div className={`w-full grid grid-cols-2 sm:grid-cols-3 md:flex md:items-center gap-2 p-1.5 overflow-x-auto scrollbar-hidden ${!isMobile ? 'rounded-full border border-white/10 bg-white/[0.02] backdrop-blur-xl' : ''}`}>
-              {categories.map(category => (
-                <button 
-                  key={category} 
-                  onClick={() => setSelectedCategory(category)} 
-                  className={`w-full md:flex-1 px-4 md:px-6 py-2 text-sm font-medium rounded-full transition-all duration-300 whitespace-nowrap
-                    ${category === selectedCategory ? "bg-white/10 text-white shadow-[inset_0px_1px_0px_0px_rgba(255,255,255,0.1)]" : "text-white/60 hover:text-white hover:bg-white/5"}`}
-                >
-                  <DecryptedText text={category} animateOn="hover" speed={30} />
-                </button>
-              ))}
-            </div>
-          </div>
+          <ProjectFilters 
+            categories={categories}
+            selectedCategory={selectedCategory}
+            onSelectCategory={setSelectedCategory}
+            isMobile={isMobile}
+          />
 
-          <div className={mobileContentPadding}>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-              {filteredProjects.map((project, index) => (
-                <motion.div 
-                  key={project.id} 
-                  initial={{ opacity: 0, y: 20 }} 
-                  animate={{ opacity: 1, y: 0 }} 
-                  transition={{ duration: 0.5, delay: index * 0.1 }} 
-                  className="group py-0 px-0"
-                >
-                  <Card className="rounded-xl border border-white/10 overflow-hidden bg-white/[0.02] relative">
-                    <a 
-                      href={project.link} 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="block"
-                    >
-                      <AspectRatio ratio={16 / 9} className="bg-secondary relative">
-                        <OptimizedImage src={project.image} alt={project.title} />
-                      </AspectRatio>
-                      
-                      <CardFooter className="justify-between before:bg-white/10 border-white/20 border-t overflow-hidden py-2 absolute before:rounded-xl bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10 backdrop-blur-md bg-black/20">
-                        <h3 className="text-left font-medium text-white">
-                          <DecryptedText 
-                            text={project.title} 
-                            animateOn="hover" 
-                            speed={30} 
-                            sequential={true} 
-                          />
-                        </h3>
-                        <Button 
-                          size="sm" 
-                          variant="ghost" 
-                          className="p-0 h-auto bg-transparent hover:bg-transparent"
-                        >
-                          <ArrowUpRight className="w-4 h-4 text-white/40 group-hover:text-white transition-colors" />
-                        </Button>
-                      </CardFooter>
-                    </a>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          </div>
+          <ProjectsList 
+            projects={projects}
+            selectedCategory={selectedCategory}
+            isMobile={isMobile}
+          />
         </div>
       </div>
     </section>
