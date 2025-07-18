@@ -15,32 +15,32 @@ type Venture = {
 const ventures: Venture[] = [
   {
     id: 0,
-    name: "kfupm.market",
-    description: "kfupm community marketplace",
+    name: "careerly.ai",
+    description: "all-in-one career support",
     url: "https://kfupmmarket.netlify.app",
-    status: "active"
+    status: "building"
   },
   {
     id: 1,
     name: "onliversity.com",
-    description: "The new way to learn",
+    description: "Interactive, personalized learning",
     url: "https://onliversity.com",
     status: "building"
   },
-  {
-    id: 2,
-    name: "mujtama.app",
-    description: "Achieve your goals and earn",
-    url: "https://mujtama.framer.website/",
-    status: "building"
-  },
-  {
-    id: 3,
-    name: "waitlister.co",
-    description: "Create beautiful waitlist pages",
-    url: "#",
-    status: "up next"
-  }
+  // {
+  //   id: 2,
+  //   name: "mujtama.app",
+  //   description: "Achieve your goals and earn",
+  //   url: "https://mujtama.framer.website/",
+  //   status: "building"
+  // },
+  // {
+  //   id: 3,
+  //   name: "waitlister.co",
+  //   description: "Create beautiful waitlist pages",
+  //   url: "#",
+  //   status: "up next"
+  // }
   // {
   //   id: 4,
   //   name: "resumly.io",
