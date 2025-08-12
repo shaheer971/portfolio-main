@@ -1,51 +1,60 @@
-import React from 'react';
-import { motion } from 'framer-motion';
 
-// Simple blur fade animation variants
-export const blurFadeVariants = {
-  hidden: {
-    opacity: 0,
-    filter: 'blur(8px)',
-    y: 20,
-  },
-  visible: (delay: number = 0) => ({
-    opacity: 1,
-    filter: 'blur(0px)',
-    y: 0,
-    transition: {
-      duration: 0.6,
-      delay: delay,
-      ease: [0.25, 0.1, 0.25, 1],
-    },
-  }),
-};
+import { useEffect, useRef } from 'react';
 
-// Component wrapper for blur fade animation on headings
-interface BlurFadeHeadingProps {
+export interface BlurFadeProps {
   children: React.ReactNode;
-  delay?: number;
   className?: string;
-  as?: keyof JSX.IntrinsicElements;
+  variant?: {
+    hidden: { y: number; opacity: number; filter: string };
+    visible: { y: number; opacity: number; filter: string };
+  };
+  duration?: number;
+  delay?: number;
+  yOffset?: number;
+  inView?: boolean;
+  inViewMargin?: string;
+  blur?: string;
 }
 
-export const BlurFadeHeading: React.FC<BlurFadeHeadingProps> = ({ 
-  children, 
-  delay = 0, 
-  className = "",
-  as = "h2"
-}) => {
-  const MotionComponent = motion[as as keyof typeof motion] as any;
+const defaultVariants = {
+  hidden: { y: 6, opacity: 0, filter: 'blur(6px)' },
+  visible: { y: 0, opacity: 1, filter: 'blur(0px)' },
+};
 
-  return (
-    <MotionComponent
-      className={className}
-      variants={blurFadeVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-100px" }}
-      custom={delay}
-    >
-      {children}
-    </MotionComponent>
-  );
+export const useBlurFade = ({
+  delay = 0,
+  duration = 0.4,
+  yOffset = 6,
+  inView = false,
+  inViewMargin = '-50px',
+  blur = '6px',
+}: Partial<BlurFadeProps> = {}) => {
+  const ref = useRef<HTMLElement>(null);
+  
+  useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          element.style.transform = 'translateY(0)';
+          element.style.opacity = '1';
+          element.style.filter = 'blur(0px)';
+        }
+      },
+      {
+        threshold: 0.1,
+        rootMargin: inViewMargin,
+      }
+    );
+
+    observer.observe(element);
+
+    return () => {
+      observer.unobserve(element);
+    };
+  }, [inViewMargin]);
+
+  return { ref, delay, duration, yOffset, blur };
 };
