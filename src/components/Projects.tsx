@@ -1,7 +1,9 @@
+
 import { useRef, useState, useEffect, useMemo, useCallback } from "react";
-import ProjectFilters from "./ProjectFilters";
-import ProjectsList from "./ProjectsList";
-import { useIsMobile } from "@/hooks/use-mobile";
+import { Splide, SplideSlide } from '@splidejs/react-splide';
+import { AutoScroll } from '@splidejs/splide-extension-auto-scroll';
+import '@splidejs/react-splide/css';
+import './Projects.module.css';
 
 type Project = {
   id: string;
@@ -13,75 +15,26 @@ type Project = {
 
 const Projects = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState("Featured");
   const sectionRef = useRef<HTMLElement>(null);
+  const splideRef = useRef<Splide>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
-  const isMobile = useIsMobile();
   
   const projects: Project[] = useMemo(() => [{
-    id: "propellar-1",
-    title: "Propellar AI Platform",
-    tags: ["Featured", "Web"],
-    image: "/lovable-uploads/d1ffb22e-2baf-4a73-a34d-c9f85c158f20.png",
-    link: "#"
-  }, {
-    id: "propellar-2", 
-    title: "Propellar Brand Identity",
-    tags: ["Branding"],
-    image: "/lovable-uploads/b29a2657-7150-463f-9295-d2c24f842e1d.png",
-    link: "#"
-  }, {
-    id: "health-io",
-    title: "Health.io Platform",
-    tags: ["Web"],
-    image: "/lovable-uploads/4617f719-7e2d-434d-9654-96789e45cdd9.png",
-    link: "#"
-  }, {
-    id: "taskflow",
-    title: "TaskFlow Project Hub",
-    tags: ["App"],
-    image: "/lovable-uploads/c9889f9e-51cb-4449-b826-b0deb4fd41bb.png",
-    link: "#"
-  }, {
-    id: "onliversity",
-    title: "Onliversity Brand Identity", 
-    tags: ["Branding"],
-    image: "/lovable-uploads/4c6b8c45-1cc6-46d0-a25f-4ff00ec30d0e.png",
-    link: "#"
-  }, {
-    id: "careerly-brand",
-    title: "Careerly Brand Identity",
-    tags: ["Branding"],
-    image: "/lovable-uploads/8cd078eb-a5c8-4084-bddb-9b0b51c40347.png",
-    link: "#"
-  }, {
-    id: "calendar-app",
-    title: "Calendar Application",
-    tags: ["App"],
-    image: "/lovable-uploads/79cef69f-2f3e-4a32-888e-fc80cb45c8ca.png",
-    link: "#"
-  }, {
-    id: "careerly-platform",
-    title: "Careerly Career Platform",
-    tags: ["Featured", "Web"],
-    image: "/lovable-uploads/ab8b7787-9334-488a-95d8-19942f277743.png",
-    link: "#"
-  }, {
     id: "bolt1",
     title: "Hackathon Hero concept",
-    tags: ["Web"],
+    tags: ["Web", "React.js"],
     image: "/project images/bolt1.png",
     link: "#"
-  }, {
+  },  {
     id: "nextai",
     title: "Next AI landing template",
-    tags: ["Web"],
+    tags: ["Web", "React.js"],
     image: "/project images/nextai.png",
     link: "https://next-ai-landing.netlify.app"
-  }, {
+  },{
     id: "fayda-digital",
     title: "Fayda Digital onboarding",
-    tags: ["App"],
+    tags: ["App", "Featured"],
     image: "/project images/fayda digital.png",
     link: "https://www.behance.net/gallery/172586225/Fayda-Digital-UI-design"
   }, {
@@ -110,9 +63,52 @@ const Projects = () => {
     link: "#"
   }], []);
 
-  // Categories for filtering
-  const categories = ["Featured", "Web", "App", "Branding"];
-
+  // Splide options for carousel behavior
+  const splideOptions = {
+    type: 'loop',
+    drag: true,
+    pagination: false,
+    arrows: false,
+    autoplay: false, // Disable regular autoplay, use AutoScroll instead
+    perPage: 'auto' as const,
+    perMove: 1,
+    gap: '12px',
+    focus: 'center', // Center the active slide
+    trimSpace: false, // Don't trim empty space
+    padding: { 
+      left: '50%', // Start from center
+      right: '50%' // End at center
+    },
+    autoScroll: {
+      speed: 0.3, // Continuous slow scroll (lower = slower)
+      pauseOnHover: true,
+      pauseOnFocus: true,
+    },
+    breakpoints: {
+      640: {
+        gap: '10px',
+        padding: { 
+          left: '25%',
+          right: '25%'
+        },
+      },
+      768: {
+        gap: '10px',
+        padding: { 
+          left: '40%',
+          right: '40%'
+        },
+      },
+      1024: {
+        gap: '12px',
+        padding: { 
+          left: '50%',
+          right: '50%'
+        },
+      },
+    },
+  };
+  
   // Optimized intersection observer with useCallback
   const handleIntersection = useCallback(([entry]: IntersectionObserverEntry[]) => {
     setIsVisible(entry.isIntersecting);
@@ -122,7 +118,7 @@ const Projects = () => {
     if (!observerRef.current) {
       observerRef.current = new IntersectionObserver(handleIntersection, {
         threshold: 0.1,
-        rootMargin: '50px'
+        rootMargin: '50px' // Preload slightly before visible
       });
     }
     
@@ -139,27 +135,50 @@ const Projects = () => {
   }, [handleIntersection]);
 
   return (
-    <section id="work" ref={sectionRef} className="relative py-20 slide-up overflow-hidden" style={{
+    <section id="work" ref={sectionRef} className="relative my-0 py-[10px] slide-up overflow-hidden mobile-16-9 md:h-auto" style={{
       animationDelay: '0.1s'
     }}>
-      <div className="content-container">
+      {/* Vertical lines acting as boundaries */}
+      <div className="absolute left-0 top-0 bottom-0 w-px bg-gray-800 z-10"></div>
+      <div className="absolute right-0 top-0 bottom-0 w-px bg-gray-800 z-10"></div>
+      
+      {/* Bounded carousel container */}
+      <div className="w-full px-px relative overflow-hidden">
         <div className={`transition-all duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-          
-          {/* Project Filters */}
-          <ProjectFilters 
-            categories={categories}
-            selectedCategory={selectedCategory}
-            onSelectCategory={setSelectedCategory}
-            isMobile={isMobile}
-          />
-          
-          {/* Projects List with Navigation */}
-          <ProjectsList 
-            projects={projects}
-            selectedCategory={selectedCategory}
-            isMobile={isMobile}
-          />
-          
+          {/* Splide Carousel - Centered and Masked */}
+          <div className="splide-section relative overflow-hidden">
+            {/* Progressive blur fade overlays */}
+            <div className="progressive-blur-left"></div>
+            <div className="progressive-blur-right"></div>
+            <div className="carousel-mask relative overflow-hidden">
+              <Splide
+                ref={splideRef}
+                options={splideOptions}
+                extensions={{ AutoScroll }}
+                className="splide splide--loop splide--ltr splide--draggable"
+                aria-label="Projects Carousel"
+              >
+                {projects.map((project, index) => (
+                  <SplideSlide key={`${project.id}-${index}`}>
+                    <div className="splide-img-wrapper w-[350px] sm:w-[450px] md:w-[500px] lg:w-[600px]">
+                      <div className="relative overflow-hidden bg-gray-900 border border-gray-800">
+                        <div className="aspect-[16/9] overflow-hidden">
+                          <img
+                            src={project.image}
+                            alt={project.title}
+                            className="splide-img w-full h-full object-cover"
+                            draggable={false}
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </SplideSlide>
+                ))}
+              </Splide>
+            </div>
+          </div>
         </div>
       </div>
     </section>
