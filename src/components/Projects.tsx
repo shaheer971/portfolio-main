@@ -1,8 +1,7 @@
-
 import { useRef, useState, useEffect, useMemo, useCallback } from "react";
 import ProjectFilters from "./ProjectFilters";
 import ProjectsList from "./ProjectsList";
-import { useMobile } from "@/hooks/use-mobile";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 type Project = {
   id: string;
@@ -17,7 +16,7 @@ const Projects = () => {
   const [selectedCategory, setSelectedCategory] = useState("Featured");
   const sectionRef = useRef<HTMLElement>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
-  const isMobile = useMobile();
+  const isMobile = useIsMobile();
   
   const projects: Project[] = useMemo(() => [{
     id: "propellar-1",
